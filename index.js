@@ -40,7 +40,4 @@ setInterval(() => {
   comment.innerHTML = 'ABC abc 123 １２３ ｱｲｳｴｵ あいうえお アイウエオ 漢字'
   comment.classList.add('comment')
   screen.appendChild(comment)
-
-  const width = comment.width
-  console.log(width)
 }, 5000)
