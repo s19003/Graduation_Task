@@ -1,2 +1,3 @@
 # Graduation_Task
-卒業研究
+
+https://s19003.github.io/Graduation_Task/
