@@ -1,6 +1,9 @@
+* {
+  margin: 0;
+}
+
 .screen {
-  /* background-color: black; */
-  width: full;
+  width: 100%;
   height: 1080px;
   overflow: hidden;
   position: relative;
@@ -8,7 +11,12 @@
 
 .comment {
   color: white;
-  font-size: 48px;
+  font-size: 50px;
+  font-weight: bolder;
+  text-shadow: black 0 0 5px;
+
+  /* 改行しない */
+  white-space: nowrap;
 
   /* ポジションを固定する */
   position: absolute;
@@ -18,66 +26,17 @@
 
   animation-name: lane0;
   animation-timing-function: linear;
-  animation-duration: 10s;
+  animation-duration: 20s;
   animation-fill-mode: forwards;
 }
 
-.comment2 {
-  color: white;
-  font-size: 48px;
-
-  /* ポジションを固定する */
-  position: absolute;
-
-  /* 文字の行間を調節する */
-  line-height: 1;
-
-  animation-name: lane1;
-  animation-timing-function: linear;
-  animation-duration: 10s;
-  animation-fill-mode: forwards;
-}
-
-.comment3 {
-  color: white;
-  font-size: 48px;
-
-  /* ポジションを固定する */
-  position: absolute;
-
-  /* 文字の行間を調節する */
-  line-height: 1;
-
-  animation-name: lane2;
-  animation-timing-function: linear;
-  animation-duration: 10s;
-  animation-fill-mode: forwards;
-}
 
 /* @keyframesは、アニメーション開始から終了するまでのアニメーションを指定する */
 @keyframes lane0 {
   0% {
-    transform: translate(1920px, 0);
+    transform: translate(100vw);
   }
   100% {
-    transform: translate(-1280px, 0);
-  }
-}
-
-@keyframes lane1 {
-  from {
-    transform: translate(1920px, 50px);
-  }
-  to {
-    transform: translate(-1280px, 50px);
-  }
-}
-
-@keyframes lane2 {
-  from {
-    transform: translate(1920px, 100px);
-  }
-  to {
-    transform: translate(-1280px, 100px);
+    transform: translate(-150vw);
   }
 }

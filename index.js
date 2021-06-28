@@ -37,7 +37,10 @@ const screen = document.querySelector('.screen')
 
 setInterval(() => {
   const comment = document.createElement('span')
-  comment.innerHTML = 'Hello World!!'
+  comment.innerHTML = 'ABC abc 123 １２３ ｱｲｳｴｵ あいうえお アイウエオ 漢字'
   comment.classList.add('comment')
   screen.appendChild(comment)
-}, 2000)
+
+  const width = comment.width
+  console.log(width)
+}, 5000)
