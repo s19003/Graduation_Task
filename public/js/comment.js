@@ -8,10 +8,12 @@ let count = 0
 // DOMでscreenのspanを読み取って流す
 window.addEventListener('load', () => {
   setInterval(() => {
-    const body = document.body
-    console.log(body)
+    fetch('/', {
+      method: 'POST',
+      body: 'hello'
+    })
   }, 3000)
-});
+})
 
 setInterval(() => {
   const comment = document.createElement('span')
@@ -19,7 +21,7 @@ setInterval(() => {
   comment.classList.add('comment')
   comment.classList.add('color-white')
 
-  if(toggle) {
+  if (toggle) {
     comment.classList.remove('color-white')
     comment.classList.add('color-blue')
   }
@@ -31,10 +33,10 @@ setInterval(() => {
 
 button.addEventListener('click', () => {
   if (toggle) {
-    toggle=false
-    console.log("toggle=false")
+    toggle = false
+    console.log('toggle=false')
   } else {
-    toggle=true
-    console.log("toggle=true")
+    toggle = true
+    console.log('toggle=true')
   }
 })
