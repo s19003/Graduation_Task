@@ -5,16 +5,6 @@ const button = document.querySelector('.button')
 let toggle = false
 let count = 0
 
-// DOMでscreenのspanを読み取って流す
-window.addEventListener('load', () => {
-  setInterval(() => {
-    fetch('/', {
-      method: 'POST',
-      body: 'hello'
-    })
-  }, 3000)
-})
-
 setInterval(() => {
   const comment = document.createElement('span')
   comment.innerHTML = count

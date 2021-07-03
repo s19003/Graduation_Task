@@ -12,10 +12,6 @@ app.get('/', (req, res) => {
   res.sendFile('index.html')
 })
 
-app.get('/test', (req, res) => {
-  res.sendFile(__dirname + '/public/setting.html')
-})
-
 // server
 app.listen(port, () => {
   console.log(`http://localhost:${port}`)
