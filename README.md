@@ -1,3 +1,1 @@
-# Graduation_Task
-
-https://s19003.github.io/Graduation_Task/
+## 卒研プロトタイプ(Graduation_Task)
