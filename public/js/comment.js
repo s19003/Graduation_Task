@@ -18,8 +18,20 @@ setInterval(() => {
 
   screen.appendChild(comment)
 
+  const obj = { name: '上原功也', age: count }
+
+  const data = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(obj)
+  }
+
+  fetch('/post', data)
+  console.log(data)
   count++
-}, 3000)
+}, 1000)
 
 button.addEventListener('click', () => {
   if (toggle) {
