@@ -17,28 +17,11 @@ setInterval(() => {
   }
 
   screen.appendChild(comment)
-
-  const obj = { name: '上原功也', age: count }
-
-  const data = {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(obj)
-  }
-
-  fetch('/post', data)
-  console.log(data)
   count++
 }, 1000)
 
-button.addEventListener('click', () => {
-  if (toggle) {
-    toggle = false
-    console.log('toggle=false')
-  } else {
-    toggle = true
-    console.log('toggle=true')
-  }
-})
+setInterval(() => {
+  fetch('http://localhost:3000', { method: 'POST' })
+    .then(res => res.json())
+    .then(res => console.log(res))
+}, 7000)

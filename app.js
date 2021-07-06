@@ -13,8 +13,16 @@ app.get('/', (req, res) => {
   res.sendFile('index.html')
 })
 
-app.post('/post', (req, res) => {
-  console.log(req.body)
+app.post('/', (req, res) => {
+  let sampleJson = {
+    platform: 'Twitter',
+    name: '上原',
+    comment: 'とても面白いです!!',
+    date: new Date().toLocaleString()
+  }
+
+  res.json(sampleJson)
+  console.log('OK')
 })
 
 // server
