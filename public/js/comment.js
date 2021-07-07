@@ -18,8 +18,8 @@ setInterval(() => {
 
   screen.appendChild(comment)
   count++
-}, 1000)
 
-fetch('http://localhost:3000/screen')
-  .then(response => response.text())
-  .then(text => console.log(text))
+  fetch('http://localhost:3000/screen', { method: 'POST' })
+    .then(res => res.json())
+    .then(res => console.log(res))
+}, 1000)

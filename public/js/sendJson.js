@@ -1,20 +1,20 @@
 const button = document.querySelector('.button')
 
-button.addEventListener('click', () => {
-  let sampleJson = {
-    platform: 'Twitter',
-    name: '上原',
-    comment: 'とても面白いです!!',
-    date: new Date().toLocaleString()
-  }
+const sample = { name: '上原功也' }
 
-  const data = {
+button.addEventListener('click', () => {
+  fetch('/', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify(sampleJson)
-  }
+    body: JSON.stringify(sample)
+  }).then(res => {
+    if (!res.ok) {
+      throw new Error()
+    }
 
-  fetch('/', data)
+    console.log('OK')
+    return res
+  })
 })
