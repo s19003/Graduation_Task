@@ -2,9 +2,12 @@
 
 const express = require('express')
 const app = express()
-const port = 3000
+const http = require('http')
+const server = http.createServer(app)
+const { Server } = require('socket.io')
+const io = new Server(server)
 
-let sample = { test: 'test' }
+const port = 3000
 
 // ==============================
 // Settings
@@ -21,24 +24,24 @@ app.get('/', (req, res) => {
   res.sendFile('index.html')
 })
 
-app.post('/', (req, res) => {
-  const test = JSON.stringify(req.body)
-  sample = test
-  console.log(sample)
-})
+app.post('/', (req, res) => {})
 
 // "/screen"に、GETリクエストを受信した場合
 app.get('/screen', (req, res) => {
   res.sendFile(__dirname + '/public/screen.html')
 })
 
-app.post('/screen', (req, res) => {
-  res.json(sample)
+io.on('connection', socket => {
+  io.emit('chat message', 'ここにJSONです')
+
+  socket.on('disconnect', () => {
+    console.log('ユーザーの接続が切れました')
+  })
 })
 
 // ==============================
 // Server
 // ==============================
-app.listen(port, () => {
+server.listen(port, () => {
   console.log(`http://localhost:${port}`)
 })

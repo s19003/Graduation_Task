@@ -2,28 +2,25 @@
   margin: 0;
 }
 
+html,
+body {
+  width: 100%;
+  height: 100%;
+}
+
 body::-webkit-scrollbar {
   display: none;
 }
 
-h1 {
-  font-size: 100px;
-}
-
 .screen {
   width: 100%;
-  height: 1080px;
+  height: 100%;
   overflow: hidden;
   position: relative;
 }
 
 .color-white {
   color: white;
-  font-size: 50px;
-}
-
-.color-blue {
-  color: blue;
   font-size: 50px;
 }
 
@@ -45,7 +42,6 @@ h1 {
   animation-duration: 20s;
   animation-fill-mode: forwards;
 }
-
 
 /* @keyframesは、アニメーション開始から終了するまでのアニメーションを指定する */
 @keyframes lane0 {
