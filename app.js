@@ -24,23 +24,30 @@ app.get('/', (req, res) => {
   res.sendFile('index.html')
 })
 
-app.post('/', (req, res) => {})
-
 // "/screen"に、GETリクエストを受信した場合
 app.get('/screen', (req, res) => {
   res.sendFile(__dirname + '/public/screen.html')
 })
 
-io.on('connection', socket => {
-  io.emit('chat message', 'ここにJSONです')
+// ==============================
+// Socket
+// ==============================
 
+io.on('connection', socket => {
+  // io.emit('chat message', 'ここにJSONです')
+
+  socket.on('settings', settings => {
+    io.emit('send json', settings)
+  })
+
+  // 接続が切れた時の処理
   socket.on('disconnect', () => {
     console.log('ユーザーの接続が切れました')
   })
 })
 
 // ==============================
-// Server
+// Listening
 // ==============================
 server.listen(port, () => {
   console.log(`http://localhost:${port}`)

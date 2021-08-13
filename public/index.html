@@ -2,14 +2,26 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>Home</title>
-    <script src="js/sendJson.js" defer></script>
+    <title>Web配信ツール</title>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="js/main.js" defer></script>
+    <link rel="stylesheet" href="css/main.css" />
   </head>
   <body>
     <main>
-      <div>
-        <input class="button" type="button" value="json" />
+      <div class="top">
+        <div class="border flex">
+          <div class="sample">Hello World!!</div>
+        </div>
       </div>
+      <div class="middle">
+        <div class="border flex">
+          <div class="fontSize">フォントサイズ</div>
+          <div class="fontColor">フォントカラー</div>
+        </div>
+      </div>
+
+      <div class="bottom"></div>
     </main>
   </body>
 </html>
