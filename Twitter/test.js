@@ -16,7 +16,8 @@ async function getRequest () {
   // specify a search query, and any additional fields that are required
   // by default, only the Tweet ID and text fields are returned
   const params = {
-    query: 'from:twitterdev -is:retweet',
+    // query: 'from:twitterdev -is:retweet',
+    query: '#沖縄 -is:retweet',
     'tweet.fields': 'author_id'
   }
 
@@ -34,9 +35,22 @@ async function getRequest () {
   }
 }
 
-;(async () => {
+// ;(async () => {
+//   try {
+//     // Make request
+//     const response = await getRequest()
+//     console.dir(response, {
+//       depth: null
+//     })
+//   } catch (e) {
+//     console.log(e)
+//     process.exit(-1)
+//   }
+//   process.exit()
+// })()
+
+const getTweets = async () => {
   try {
-    // Make request
     const response = await getRequest()
     console.dir(response, {
       depth: null
@@ -45,9 +59,9 @@ async function getRequest () {
     console.log(e)
     process.exit(-1)
   }
-  process.exit()
-})()
+}
 
 module.exports = {
-  getRequest: getRequest
+  getRequest: getRequest,
+  getTweets: getTweets
 }

@@ -9,7 +9,7 @@ const io = new Server(server)
 
 const port = 3000
 
-const twitter = require('./Twitter/test.js').getRequest
+const twitter = require('./Twitter/test.js').getTweets
 
 // ==============================
 // Settings
@@ -53,5 +53,5 @@ io.on('connection', socket => {
 // ==============================
 server.listen(port, () => {
   console.log(`http://localhost:${port}`)
-  console.log(twitter())
+  twitter()
 })
