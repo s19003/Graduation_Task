@@ -12,19 +12,29 @@ let color = 'white'
 // ==============================
 // Socket
 // ==============================
-socket.on('tweets json', tweets => {
-  if (tweets.meta.result_count != 0) {
-    for (let i = tweets.meta.result_count; 0 < i; i--) {
-      if (counter < 9) {
-        counter++
-      } else {
-        counter = 0
-      }
-      createAnimation(tweets.data[i - 1], counter)
-      console.log(counter)
+socket.on('json', tweets => {
+  try {
+    if (tweets == undefined) {
+      console.log('undefined')
+      return
     }
-  } else {
-    console.log('Tweetが無いです')
+
+    if (tweets.meta.result_count != 0) {
+      for (let i = tweets.meta.result_count; 0 < i; i--) {
+        if (counter < 9) {
+          counter++
+        } else {
+          counter = 0
+        }
+        createAnimation(tweets.data[i - 1], counter)
+        console.log(counter)
+      }
+    } else {
+      console.log('Tweetが無いです')
+    }
+  } catch (e) {
+    console.log(tweets)
+    console.log(e)
   }
 })
 

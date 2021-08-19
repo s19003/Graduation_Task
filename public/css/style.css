@@ -35,7 +35,7 @@ body::-webkit-scrollbar {
   line-height: 1;
 
   animation-timing-function: linear;
-  animation-duration: 10s;
+  animation-duration: 30s;
   animation-fill-mode: forwards;
 }
 
@@ -45,7 +45,7 @@ body::-webkit-scrollbar {
     transform: translate(100vw, 0px);
   }
   100% {
-    transform: translate(-150vw, 0px);
+    transform: translate(-500vw, 0px);
   }
 }
 
@@ -54,7 +54,7 @@ body::-webkit-scrollbar {
     transform: translate(100vw, 70px);
   }
   100% {
-    transform: translate(-150vw, 70px);
+    transform: translate(-500vw, 70px);
   }
 }
 
@@ -63,7 +63,7 @@ body::-webkit-scrollbar {
     transform: translate(100vw, 140px);
   }
   100% {
-    transform: translate(-150vw, 140px);
+    transform: translate(-500vw, 140px);
   }
 }
 
@@ -72,7 +72,7 @@ body::-webkit-scrollbar {
     transform: translate(100vw, 210px);
   }
   100% {
-    transform: translate(-150vw, 210px);
+    transform: translate(-500vw, 210px);
   }
 }
 
@@ -81,7 +81,7 @@ body::-webkit-scrollbar {
     transform: translate(100vw, 280px);
   }
   100% {
-    transform: translate(-150vw, 280px);
+    transform: translate(-500vw, 280px);
   }
 }
 
@@ -90,7 +90,7 @@ body::-webkit-scrollbar {
     transform: translate(100vw, 350px);
   }
   100% {
-    transform: translate(-150vw, 350px);
+    transform: translate(-500vw, 350px);
   }
 }
 @keyframes lane6 {
@@ -98,7 +98,7 @@ body::-webkit-scrollbar {
     transform: translate(100vw, 420px);
   }
   100% {
-    transform: translate(-150vw, 420px);
+    transform: translate(-500vw, 420px);
   }
 }
 @keyframes lane7 {
@@ -106,7 +106,7 @@ body::-webkit-scrollbar {
     transform: translate(100vw, 490px);
   }
   100% {
-    transform: translate(-150vw, 490px);
+    transform: translate(-500vw, 490px);
   }
 }
 @keyframes lane8 {
@@ -114,7 +114,7 @@ body::-webkit-scrollbar {
     transform: translate(100vw, 560px);
   }
   100% {
-    transform: translate(-150vw, 560px);
+    transform: translate(-500vw, 560px);
   }
 }
 @keyframes lane9 {
@@ -122,6 +122,6 @@ body::-webkit-scrollbar {
     transform: translate(100vw, 630px);
   }
   100% {
-    transform: translate(-150vw, 630px);
+    transform: translate(-500vw, 630px);
   }
 }

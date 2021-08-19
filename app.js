@@ -8,9 +8,11 @@ const { Server } = require('socket.io')
 const io = new Server(server)
 
 const port = 3000
-let toggle = false
+let toggle = true
+let newest = ''
 
 const twitter = require('./Twitter/twitter.js').getTweets
+const toggleTwitter = require('./Twitter/twitter.js').toggleTwitter
 
 // ==============================
 // Settings
@@ -37,9 +39,27 @@ app.get('/screen', (req, res) => {
 // ==============================
 
 io.on('connection', socket => {
-  socket.on('initialize', initialize => {
-    console.log(initialize)
-    toggleTwitter()
+  socket.on('initialize', async initialize => {
+    console.log('--------------最初のツイートは削除-----------------')
+    const first = await toggleTwitter(toggle, newest)
+    console.log(first)
+    newest = first.meta.newest_id
+    console.log('-----------------------------------------')
+
+    toggle = false
+
+    setInterval(async () => {
+      const json = await toggleTwitter(toggle, newest)
+      console.log(json)
+      try {
+        if (json.meta.result_count != 0) {
+          newest = json.meta.newest_id
+          io.emit('json', json)
+        }
+      } catch (e) {
+        console.log(e)
+      }
+    }, 10000)
   })
 
   socket.on('settings', settings => {
@@ -71,15 +91,4 @@ const callbackGetTweet = async () => {
     io.emit('tweets json', tweets)
     callbackGetTweet()
   }, 20000)
-}
-
-const toggleTwitter = () => {
-  setInterval(async () => {
-    if (toggle === false) {
-      console.log('Toggle=False')
-    } else {
-      const tweets = await twitter('猫')
-      io.emit('tweets json', tweets)
-    }
-  }, 10000)
 }
