@@ -19,12 +19,9 @@ body::-webkit-scrollbar {
   position: relative;
 }
 
-.color-white {
+.comment {
   color: white;
   font-size: 50px;
-}
-
-.comment {
   font-weight: bolder;
   text-shadow: black 0 0 5px;
 
@@ -37,18 +34,94 @@ body::-webkit-scrollbar {
   /* 文字の行間を調節する */
   line-height: 1;
 
-  animation-name: lane0;
   animation-timing-function: linear;
-  animation-duration: 20s;
+  animation-duration: 10s;
   animation-fill-mode: forwards;
 }
 
 /* @keyframesは、アニメーション開始から終了するまでのアニメーションを指定する */
 @keyframes lane0 {
   0% {
-    transform: translate(100vw);
+    transform: translate(100vw, 0px);
   }
   100% {
-    transform: translate(-150vw);
+    transform: translate(-150vw, 0px);
+  }
+}
+
+@keyframes lane1 {
+  0% {
+    transform: translate(100vw, 70px);
+  }
+  100% {
+    transform: translate(-150vw, 70px);
+  }
+}
+
+@keyframes lane2 {
+  0% {
+    transform: translate(100vw, 140px);
+  }
+  100% {
+    transform: translate(-150vw, 140px);
+  }
+}
+
+@keyframes lane3 {
+  0% {
+    transform: translate(100vw, 210px);
+  }
+  100% {
+    transform: translate(-150vw, 210px);
+  }
+}
+
+@keyframes lane4 {
+  0% {
+    transform: translate(100vw, 280px);
+  }
+  100% {
+    transform: translate(-150vw, 280px);
+  }
+}
+
+@keyframes lane5 {
+  0% {
+    transform: translate(100vw, 350px);
+  }
+  100% {
+    transform: translate(-150vw, 350px);
+  }
+}
+@keyframes lane6 {
+  0% {
+    transform: translate(100vw, 420px);
+  }
+  100% {
+    transform: translate(-150vw, 420px);
+  }
+}
+@keyframes lane7 {
+  0% {
+    transform: translate(100vw, 490px);
+  }
+  100% {
+    transform: translate(-150vw, 490px);
+  }
+}
+@keyframes lane8 {
+  0% {
+    transform: translate(100vw, 560px);
+  }
+  100% {
+    transform: translate(-150vw, 560px);
+  }
+}
+@keyframes lane9 {
+  0% {
+    transform: translate(100vw, 630px);
+  }
+  100% {
+    transform: translate(-150vw, 630px);
   }
 }

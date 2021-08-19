@@ -1,20 +1,37 @@
-// screen - スクリーン
-
+let counter = 0
 const screen = document.querySelector('.screen')
 
 const socket = io()
 
-window.addEventListener('DOMContentLoaded', () => {})
+// CSS
+let fontSize = 30
+let color = 'white'
+
+// window.addEventListener('DOMContentLoaded', () => {})
 
 // ==============================
 // Socket
 // ==============================
-socket.on('send json', msg => {
-  // const comment = document.createElement('span')
-  // comment.innerHTML = msg
-  // comment.classList.add('comment')
-  // comment.classList.add('color-white')
-  // screen.appendChild(comment)
-
-  console.log(msg)
+socket.on('tweets json', tweets => {
+  if (tweets.meta.result_count != 0) {
+    for (let i = tweets.meta.result_count; 0 < i; i--) {
+      if (counter < 9) {
+        counter++
+      } else {
+        counter = 0
+      }
+      createAnimation(tweets.data[i - 1], counter)
+      console.log(counter)
+    }
+  } else {
+    console.log('Tweetが無いです')
+  }
 })
+
+const createAnimation = (tweet, counter) => {
+  const comment = document.createElement('span')
+  comment.innerHTML = tweet.text
+  comment.classList.add('comment')
+  comment.style.animationName = `lane${counter}`
+  screen.appendChild(comment)
+}
