@@ -40,7 +40,7 @@ app.get('/screen', (req, res) => {
 
 io.on('connection', socket => {
   socket.on('initialize', async initialize => {
-    console.log('--------------最初のツイートは削除-----------------')
+    console.log('---\t最初の十件は除く\t---')
     const first = await toggleTwitter(toggle, newest)
     console.log(first)
     newest = first.meta.newest_id

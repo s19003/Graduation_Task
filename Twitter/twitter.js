@@ -69,7 +69,7 @@ const getTweets = async (tag, newest) => {
 const toggleTwitter = async (toggle, newest) => {
   try {
     if (toggle) {
-      const tweets = await getTweets('PcrDayatmasıDurdurulsun', newest)
+      const tweets = await getTweets('猫', newest)
       return tweets
     } else {
       console.log('トグル=False')
