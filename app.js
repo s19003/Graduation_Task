@@ -63,8 +63,10 @@ io.on('connection', socket => {
     console.log(obj)
     if (obj.check) {
       toggle = true
+      io.emit('layout', settings)
     } else {
       toggle = false
+      io.emit('layout', settings)
     }
     console.log(toggle)
   })

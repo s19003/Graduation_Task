@@ -21,7 +21,7 @@ body::-webkit-scrollbar {
 
 .comment {
   color: white;
-  font-size: 50px;
+  /* font-size: 50px; */
   font-weight: bolder;
   text-shadow: black 0 0 5px;
 
@@ -35,7 +35,6 @@ body::-webkit-scrollbar {
   line-height: 1;
 
   animation-timing-function: linear;
-  animation-duration: 30s;
   animation-fill-mode: forwards;
 }
 

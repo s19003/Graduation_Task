@@ -6,6 +6,7 @@ const socket = io()
 // CSS
 let fontSize = 30
 let color = 'white'
+let animationDuration = 50
 
 // window.addEventListener('DOMContentLoaded', () => {})
 
@@ -38,10 +39,18 @@ socket.on('json', tweets => {
   }
 })
 
+socket.on('layout', layout => {
+  const json = JSON.parse(layout)
+  fontSize = json.fontSize
+  animationDuration = json.fontSpeed
+})
+
 const createAnimation = (tweet, counter) => {
   const comment = document.createElement('span')
   comment.innerHTML = tweet.text
   comment.classList.add('comment')
+  comment.style.fontSize = `${fontSize}px`
+  comment.style.animationDuration = `${animationDuration}s`
   comment.style.animationName = `lane${counter}`
   screen.appendChild(comment)
 }

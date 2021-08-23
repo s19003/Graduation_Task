@@ -3,9 +3,10 @@ const sample = document.querySelector('.sample')
 const size = document.querySelector('.fontSize')
 const speed = document.querySelectorAll('.speed')
 const checkbox = document.querySelector('.checkTwitter')
+const twittertag = document.querySelector('.twitterTag')
 
 let fontSize = 30
-let fontSpeed = 30
+let fontSpeed = 50
 let tag = ''
 let check = false
 
@@ -19,7 +20,8 @@ button.addEventListener('click', () => {
   let settings = {
     fontSize: fontSize,
     fontSpeed: fontSpeed,
-    check: check
+    check: check,
+    tag: tag
   }
   settings = JSON.stringify(settings)
   console.log(settings)
@@ -49,16 +51,16 @@ speed.forEach(value => {
 const valueSpeed = value => {
   switch (value) {
     case '遅い':
-      fontSpeed = 60
+      fontSpeed = 80
       break
     case '普通':
-      fontSpeed = 40
+      fontSpeed = 50
       break
     case '速い':
-      fontSpeed = 20
+      fontSpeed = 30
       break
     default:
-      fontSpeed = 40
+      fontSpeed = 50
   }
 }
 
@@ -68,4 +70,12 @@ const valueSpeed = value => {
 
 checkbox.addEventListener('change', e => {
   check = e.target.checked
+})
+
+/*
+Twitterハッシュタグ
+*/
+
+twittertag.addEventListener('input', e => {
+  tag = twittertag.value
 })
