@@ -10,20 +10,41 @@
   <body>
     <main>
       <div class="top">
-        <div class="border flex">
-          <div class="sample">Hello World!!</div>
-        </div>
+        <div class="sample">Hello World</div>
       </div>
+
       <div class="middle">
-        <div class="border flex">
-          <div class="fontSize">フォントサイズ</div>
-          <div class="fontColor">フォントカラー</div>
+        <div class="box">
+          <p>フォントサイズ</p>
+          <input class="fontSize" type="range" value="30" min="20" max="50" />
         </div>
+        <div class="box">
+          <p>スピード</p>
+          <input class="speed" type="button" value="遅い" />
+          <input class="speed" type="button" value="普通" />
+          <input class="speed" type="button" value="速い" />
+        </div>
+        <div class="box twitter">
+          <label>
+            <input
+              class="checkTwitter"
+              type="checkbox"
+            />Twiiterのハッシュタグからコメントを取得する
+          </label>
+          <input
+            class="twitterTag"
+            type="text"
+            size="20"
+            placeholder="例:ITカレッジ沖縄"
+          />
+        </div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
       </div>
+
       <div class="bottom">
-        <div class="border flex">
-          <input class="button" type="button" value="更新" />
-        </div>
+        <input class="button" type="button" value="更新" />
       </div>
     </main>
   </body>
