@@ -74,6 +74,10 @@ io.on('connection', socket => {
     console.log(layout)
   })
 
+  socket.on('format', format => {
+    console.log(format)
+  })
+
   socket.on('disconnect', () => {
     console.log('接続が切れました')
   })

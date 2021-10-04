@@ -41,7 +41,12 @@ main {
   margin-top: calc(var(--header-height) + 50px);
 }
 
-input[type="radio"] + label:before {
+/* ラジオボタン */
+.radio {
+  display: none;
+}
+
+.radio + label:after {
   content: "";
   display: inline-block;
   background-size: contain;
@@ -49,10 +54,17 @@ input[type="radio"] + label:before {
   height: 140px;
 }
 
-input[type="radio"]:checked + label::before {
-  border: 3px solid #000;
+.radio:checked + label::after {
+  border: thick solid #32a1ce;
   box-sizing: border-box;
 }
-input[type="radio"] {
-  display: none;
+
+.radio[value="niconico"] + label:after {
+  background-image: url(../img/niconico.png);
+  border-radius: 100%;
+}
+
+.radio[value="youtube"] + label:after {
+  background-image: url(../img/youtube.png);
+  border-radius: 100%;
 }
