@@ -74,8 +74,8 @@ io.on('connection', socket => {
     console.log(layout)
   })
 
-  socket.on('format', format => {
-    console.log(format)
+  socket.on('format', Format => {
+    io.emit('format', Format)
   })
 
   socket.on('disconnect', () => {

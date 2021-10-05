@@ -68,3 +68,11 @@ main {
   background-image: url(../img/youtube.png);
   border-radius: 100%;
 }
+
+p {
+  font-size: 20px;
+}
+
+.slider {
+  width: 60%;
+}

@@ -1,5 +1,6 @@
 * {
   margin: 0;
+  box-sizing: border-box;
 }
 
 html,
@@ -8,6 +9,7 @@ body {
   height: 100%;
 }
 
+/* スクロールバーを非表示にする */
 body::-webkit-scrollbar {
   display: none;
 }
@@ -16,29 +18,39 @@ body::-webkit-scrollbar {
   width: 100%;
   height: 100%;
   overflow: hidden;
-  position: relative;
+  position: fixed;
+  top: 0;
+  left: 0;
 }
 
-.comment {
-  color: white;
-  /* font-size: 50px; */
+.common {
   font-weight: bolder;
   text-shadow: black 0 0 5px;
 
+  /* 文字の行間を調節する */
+  line-height: 1.5;
+}
+
+.niconico {
   /* 改行しない */
   white-space: nowrap;
 
   /* ポジションを固定する */
   position: absolute;
 
-  /* 文字の行間を調節する */
-  line-height: 1;
-
   animation-timing-function: linear;
   animation-fill-mode: forwards;
 }
 
-/* @keyframesは、アニメーション開始から終了するまでのアニメーションを指定する */
+p::before {
+  content: "";
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  background-color: black;
+}
+
+/* ニコニコ風のレーン */
 @keyframes lane0 {
   0% {
     transform: translate(100vw, 0px);
