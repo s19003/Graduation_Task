@@ -27,18 +27,18 @@ const selectingFormat = () => {
 
 // 10秒毎に選択中のフォーマットを送信する
 setInterval(() => {
-  const Format = JSON.stringify({
+  const format = JSON.stringify({
     format: selectingFormat()
   })
 
-  socket.emit('format', Format)
-}, 10000)
+  socket.emit('Format', format)
+}, 5000)
 
 // 5秒毎にデータを送信する
 setInterval(() => {
-  const Layout = JSON.stringify({
+  const layout = JSON.stringify({
     size: sample.style.fontSize
   })
 
-  socket.emit('layout', Layout)
+  socket.emit('Layout', layout)
 }, 5000)

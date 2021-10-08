@@ -70,12 +70,12 @@ io.on('connection', socket => {
   // })
   console.log('接続しました')
 
-  socket.on('layout', layout => {
-    console.log(layout)
+  socket.on('Layout', layout => {
+    io.emit('Layout', layout)
   })
 
-  socket.on('format', Format => {
-    io.emit('format', Format)
+  socket.on('Format', format => {
+    io.emit('Format', format)
   })
 
   socket.on('disconnect', () => {

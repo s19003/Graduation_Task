@@ -1,9 +1,8 @@
+// グローバルに使用する変数や定数
 const screen = document.querySelector('.screen')
-
 const socket = io()
 
-// CSS
-let format = Config.format
+let format = Config.format // "niconico"
 
 let fontSize = Config.fontSize
 let fontColor = Config.fontColor
@@ -12,12 +11,33 @@ let animationDuration = 50
 // ==============================
 // Socket
 // ==============================
-socket.on('format', getFormat => {
-  format = JSON.parse(getFormat).format
 
+socket.on('Format', getFormat => {
+  checkFormat(getFormat)
   createComment(format)
-  console.log(fontSize)
 })
+
+socket.on('Layout', getLayout => {
+  getLayout = JSON.parse(getLayout)
+  fontSize = getLayout.size
+})
+
+// ==============================
+// 関数
+// ==============================
+
+// フォーマットを切り替えるかどうか判定する関数
+const checkFormat = getFormat => {
+  getFormat = JSON.parse(getFormat).format
+  flag = format == getFormat ? true : false
+  format = getFormat
+
+  // 選択中と違う場合、フォーマットを変更する
+  // その際、スクリーンの子要素を削除し、初期化する。
+  if (!flag) {
+    screen.innerHTML = ''
+  }
+}
 
 const createComment = text => {
   const comment = document.createElement('p')
