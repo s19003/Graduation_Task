@@ -1,3 +1,4 @@
+/* 全体に適用 */
 * {
   margin: 0;
   box-sizing: border-box;
@@ -14,6 +15,7 @@ body::-webkit-scrollbar {
   display: none;
 }
 
+/* コメントを表示するスクリーン */
 .screen {
   width: 100%;
   height: 100%;

@@ -54,6 +54,8 @@ const createComment = text => {
       comment.style.animationDuration = `50s`
       comment.style.animationName = `lane0`
       break
+    case 'youtube':
+      break
   }
 
   screen.appendChild(comment)

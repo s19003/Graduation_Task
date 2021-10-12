@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=~, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <div id="example">
+      <section>
+        プレビュー: <input type="checkbox" id="preview-dark" />背景を暗くする
+      </section>
+      <div id="example-container" class="light">
+        <div id="fakebody">
+          <yt-live-chat-renderer>
+            <yt-live-chat-ticker-renderer>
+              <yt-live-chat-ticker-paid-message-item-renderer
+                style="background-color: rgba(0, 184, 212, 1)"
+              >
+                <div id="content">
+                  <span id="fake-avatar"></span>
+                  <span>$5.00</span>
+                </div>
+              </yt-live-chat-ticker-paid-message-item-renderer>
+              <yt-live-chat-ticker-paid-message-item-renderer
+                style="background-color: rgba(208, 0, 0, 1)"
+              >
+                <div id="content">
+                  <span id="fake-avatar"></span>
+                  <span>$500.00</span>
+                </div>
+              </yt-live-chat-ticker-paid-message-item-renderer>
+            </yt-live-chat-ticker-renderer>
+            <yt-live-chat-item-list-renderer>
+              <yt-live-chat-text-message-renderer author-type="owner">
+                <yt-img-shadow
+                  id="author-photo"
+                  class="yt-live-chat-text-message-renderer"
+                ></yt-img-shadow>
+                <div id="content" class="yt-live-chat-text-message-renderer">
+                  <span id="timestamp">12:00 AM</span
+                  ><yt-live-chat-author-chip
+                    class="yt-live-chat-text-message-renderer"
+                    ><span id="author-name" type="owner"
+                      >チャンネル管理者</span
+                    ></yt-live-chat-author-chip
+                  ><span id="message">チャンネル管理者のコメントです</span>
+                </div>
+              </yt-live-chat-text-message-renderer>
+              <yt-live-chat-text-message-renderer author-type="moderator">
+                <yt-img-shadow
+                  id="author-photo"
+                  class="yt-live-chat-text-message-renderer"
+                ></yt-img-shadow>
+                <div id="content">
+                  <span id="timestamp">12:00 AM</span
+                  ><yt-live-chat-author-chip
+                    class="yt-live-chat-text-message-renderer"
+                    ><span id="author-name" type="moderator">モデレーター</span
+                    ><span id="chat-badges"
+                      ><yt-live-chat-author-badge-renderer
+                        type="moderator"
+                        class="yt-live-chat-author-badge-renderer"
+                      ></yt-live-chat-author-badge-renderer></span></yt-live-chat-author-chip
+                  ><span id="message">モデレーターのコメントです</span>
+                </div>
+              </yt-live-chat-text-message-renderer>
+              <yt-live-chat-text-message-renderer author-type="member">
+                <yt-img-shadow
+                  id="author-photo"
+                  class="yt-live-chat-text-message-renderer"
+                ></yt-img-shadow>
+                <div id="content">
+                  <span id="timestamp">12:00 AM</span
+                  ><yt-live-chat-author-chip
+                    class="yt-live-chat-text-message-renderer"
+                    ><span id="author-name" type="member">メンバーさん</span
+                    ><span id="chat-badges"
+                      ><yt-live-chat-author-badge-renderer
+                        type="member"
+                        class="yt-live-chat-author-badge-renderer"
+                      ></yt-live-chat-author-badge-renderer></span></yt-live-chat-author-chip
+                  ><span id="message" type="member"
+                    >メンバーシップに登録している人のコメントです</span
+                  >
+                </div>
+              </yt-live-chat-text-message-renderer>
+              <yt-live-chat-text-message-renderer>
+                <yt-img-shadow
+                  id="author-photo"
+                  class="yt-live-chat-text-message-renderer"
+                ></yt-img-shadow>
+                <div id="content">
+                  <span id="timestamp">12:00 AM</span
+                  ><yt-live-chat-author-chip
+                    class="yt-live-chat-text-message-renderer"
+                    ><span id="author-name"
+                      >視聴者さん</span
+                    ></yt-live-chat-author-chip
+                  ><span id="message"
+                    >123１２３ABCabcＡＢＣａｂｃひらがなカタカナ漢字！？</span
+                  >
+                </div>
+              </yt-live-chat-text-message-renderer>
+              <yt-live-chat-membership-item-renderer
+                id="header"
+                class="yt-live-chat-membership-item-renderer"
+              >
+                <yt-img-shadow
+                  id="author-photo"
+                  class="yt-live-chat-membership-item-renderer"
+                ></yt-img-shadow>
+                <div id="content">
+                  <div id="event-text">メンバーさんの名前</div>
+                  <div id="detail-text">○△□のメンバーシップ へようこそ！</div>
+                </div>
+              </yt-live-chat-membership-item-renderer>
+              <yt-live-chat-paid-message-renderer>
+                <div id="header" style="background-color: rgba(208, 0, 0, 1)">
+                  <yt-img-shadow
+                    id="author-photo"
+                    class="yt-live-chat-paid-message-renderer"
+                  ></yt-img-shadow>
+                  <div id="header-content">
+                    <div id="author-name">スーパーチャットの投稿者名</div>
+                    <div id="purchase-amount">￥10,000</div>
+                  </div>
+                </div>
+                <div
+                  id="content"
+                  style="background-color: rgba(230, 33, 23, 1)"
+                >
+                  <div id="message" dir="auto">
+                    これはスーパーチャット本文のサンプルです
+                  </div>
+                </div>
+              </yt-live-chat-paid-message-renderer>
+              <yt-live-chat-paid-message-renderer>
+                <div id="header" style="background-color: rgba(255, 170, 0, 1)">
+                  <yt-img-shadow
+                    id="author-photo"
+                    class="yt-live-chat-paid-message-renderer"
+                  ></yt-img-shadow>
+                  <div id="header-content">
+                    <div id="author-name" style="color: rgba(0, 0, 0, 0.875)">
+                      スーパーチャットの投稿者名
+                    </div>
+                    <div
+                      id="purchase-amount"
+                      style="color: rgba(0, 0, 0, 0.875)"
+                    >
+                      $10.00
+                    </div>
+                  </div>
+                </div>
+                <div
+                  id="content"
+                  style="background-color: rgba(255, 202, 40, 1)"
+                >
+                  <div
+                    id="message"
+                    dir="auto"
+                    style="color: rgba(0, 0, 0, 0.875)"
+                  >
+                    スーパーチャットの本文その2。
+                  </div>
+                </div>
+              </yt-live-chat-paid-message-renderer>
+            </yt-live-chat-item-list-renderer>
+          </yt-live-chat-renderer>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
