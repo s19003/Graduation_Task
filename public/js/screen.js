@@ -6,7 +6,6 @@ let format = Config.format // "niconico"
 
 let fontSize = Config.fontSize
 let fontColor = Config.fontColor
-let animationDuration = 50
 
 // ==============================
 // Socket
@@ -17,7 +16,7 @@ socket.on('Format', getFormat => {
 
   // ランダムな時間を指定(一律に流さない)
   const random = Math.floor(Math.random() * 5000)
-  setTimeout(() => createComment('テスト'), random)
+  setTimeout(() => createComment(`テスト${random}`), random)
 })
 
 socket.on('Layout', getLayout => {
@@ -32,14 +31,20 @@ socket.on('Layout', getLayout => {
 // フォーマットを切り替えるかどうか判定する関数
 const checkFormat = getFormat => {
   getFormat = JSON.parse(getFormat).format
-  flag = format == getFormat ? true : false
-  format = getFormat
 
   // 選択中と違う場合、フォーマットを変更する
   // その際、スクリーンの子要素を削除し、初期化する。
-  if (!flag) {
+  if (format != getFormat) {
     screen.innerHTML = ''
   }
+
+  if (format == 'niconico' && getFormat == 'youtube') {
+    const container = document.createElement('div')
+    container.classList.add('container')
+    screen.appendChild(container)
+  }
+
+  format = getFormat
 }
 
 const createComment = text => {
@@ -50,43 +55,61 @@ const createComment = text => {
 
   switch (format) {
     case 'niconico':
-      const comment = document.createElement('div')
-      comment.innerHTML = text
-      comment.style.fontSize = fontSize
-      comment.style.color = fontColor
+      const Ncomment = document.createElement('div')
+      Ncomment.innerHTML = text
+      Ncomment.style.fontSize = fontSize
+      Ncomment.style.color = fontColor
 
-      comment.classList.add('common')
-      comment.classList.add('niconico')
+      Ncomment.classList.add('common')
+      Ncomment.classList.add('niconico')
 
       // TwitterIcon or YoutubeIcon
       switch (icon) {
         case 'Twitter':
-          comment.classList.add('twitter')
+          Ncomment.classList.add('twitter')
           break
         case 'Youtube':
-          comment.classList.add('youtube')
+          Ncomment.classList.add('youtube')
           break
       }
 
-      // 画面の右端から開始する
-      comment.style.left = `${width}px`
+      // アニメーションクラスを設定するために、
+      // 要素を追加しておく必要がある。
+      screen.appendChild(Ncomment)
+
+      // 画面の右側の位置を取得する
+      Ncomment.style.left = `${width}px`
 
       // 高さをランダムにする
-      comment.style.top = `${Math.round(Math.random() * 500)}px`
-
-      screen.appendChild(comment)
+      Ncomment.style.top = `${Math.round(Math.random() * 500)}px`
 
       // 横幅とコメント幅を求めることで、
-      // 移動する範囲を取得・CSSに設定する
-      const animationWidth = `-${width + comment.clientWidth}px`
-      comment.style.setProperty('--translateX', animationWidth)
+      // 移動する範囲を取得し、:rootに設定する
+      const animationWidth = `-${width + Ncomment.clientWidth}px`
+      Ncomment.style.setProperty('--translateX', animationWidth)
 
-      comment.classList.add('animation')
+      Ncomment.classList.add('animation')
 
-      // 60秒後に要素を削除
-      setTimeout(() => comment.remove(), 30000)
+      // 30秒後に要素を削除(変更の可能性あり)
+      setTimeout(() => Ncomment.remove(), 30000)
       break
     case 'youtube':
+      const Ycomment = document.createElement('div')
+      Ycomment.innerHTML = text
+      Ycomment.style.fontSize = fontSize
+      Ycomment.style.color = fontColor
+
+      Ycomment.classList.add('common')
+
+      const container = document.querySelector('.container')
+
+      container.appendChild(Ycomment)
+
+      container.scrollTop = container.clientHeight
+      console.log(container.clientHeight)
+
+      // setTimeout(() => Ycomment.remove(), 60000)
+
       break
   }
 }
