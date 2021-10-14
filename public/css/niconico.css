@@ -1,0 +1,39 @@
+:root {
+  --translateX: -1000px;
+}
+
+.niconico {
+  /* ポジションを固定する */
+  position: fixed;
+
+  /* 改行しない */
+  white-space: nowrap;
+}
+
+.twitter::before {
+  content: "";
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  background-size: contain;
+  background-image: url(../img/twitter.png);
+}
+
+.youtube::before {
+  content: "";
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  background-size: contain;
+  background-image: url(../img/youtube.png);
+}
+
+.animation {
+  animation: 10s linear 0s 1 forwards lane;
+}
+
+@keyframes lane {
+  100% {
+    transform: translateX(var(--translateX));
+  }
+}

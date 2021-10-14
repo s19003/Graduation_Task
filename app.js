@@ -88,4 +88,5 @@ io.on('connection', socket => {
 // ==============================
 server.listen(port, async () => {
   console.log(`http://localhost:${port}/main`)
+  console.log(`http://localhost:${port}/screen`)
 })

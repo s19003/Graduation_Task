@@ -14,7 +14,10 @@ let animationDuration = 50
 
 socket.on('Format', getFormat => {
   checkFormat(getFormat)
-  createComment(format)
+
+  // ランダムな時間を指定(一律に流さない)
+  const random = Math.floor(Math.random() * 5000)
+  setTimeout(() => createComment('テスト'), random)
 })
 
 socket.on('Layout', getLayout => {
@@ -40,65 +43,50 @@ const checkFormat = getFormat => {
 }
 
 const createComment = text => {
-  const comment = document.createElement('p')
-
-  comment.innerHTML = text
-  comment.classList.add('common')
-
-  comment.style.fontSize = fontSize
-  comment.style.color = fontColor
+  // ブラウザの横幅・縦幅
+  const width = document.documentElement.clientWidth
+  const height = document.documentElement.clientHeight
+  const icon = 'Twitter'
 
   switch (format) {
     case 'niconico':
+      const comment = document.createElement('div')
+      comment.innerHTML = text
+      comment.style.fontSize = fontSize
+      comment.style.color = fontColor
+
+      comment.classList.add('common')
       comment.classList.add('niconico')
-      comment.style.animationDuration = `50s`
-      comment.style.animationName = `lane0`
+
+      // TwitterIcon or YoutubeIcon
+      switch (icon) {
+        case 'Twitter':
+          comment.classList.add('twitter')
+          break
+        case 'Youtube':
+          comment.classList.add('youtube')
+          break
+      }
+
+      // 画面の右端から開始する
+      comment.style.left = `${width}px`
+
+      // 高さをランダムにする
+      comment.style.top = `${Math.round(Math.random() * 500)}px`
+
+      screen.appendChild(comment)
+
+      // 横幅とコメント幅を求めることで、
+      // 移動する範囲を取得・CSSに設定する
+      const animationWidth = `-${width + comment.clientWidth}px`
+      comment.style.setProperty('--translateX', animationWidth)
+
+      comment.classList.add('animation')
+
+      // 60秒後に要素を削除
+      setTimeout(() => comment.remove(), 30000)
       break
     case 'youtube':
       break
   }
-
-  screen.appendChild(comment)
 }
-
-// socket.on('json', tweets => {
-//   try {
-//     if (tweets == undefined) {
-//       console.log('undefined')
-//       return
-//     }
-
-//     if (tweets.meta.result_count != 0) {
-//       for (let i = tweets.meta.result_count; 0 < i; i--) {
-//         if (counter < 9) {
-//           counter++
-//         } else {
-//           counter = 0
-//         }
-//         createAnimation(tweets.data[i - 1], counter)
-//         console.log(counter)
-//       }
-//     } else {
-//       console.log('Tweetが無いです')
-//     }
-//   } catch (e) {
-//     console.log(tweets)
-//     console.log(e)
-//   }
-// })
-
-// socket.on('layout', layout => {
-//   const json = JSON.parse(layout)
-//   fontSize = json.fontSize
-//   animationDuration = json.fontSpeed
-// })
-
-// const createAnimation = (tweet, counter) => {
-//   const comment = document.createElement('span')
-//   comment.innerHTML = tweet.text
-//   comment.classList.add('comment')
-//   comment.style.fontSize = `${fontSize}px`
-//   comment.style.animationDuration = `${animationDuration}s`
-//   comment.style.animationName = `lane${counter}`
-//   screen.appendChild(comment)
-// }
