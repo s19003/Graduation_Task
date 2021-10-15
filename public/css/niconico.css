@@ -8,24 +8,9 @@
 
   /* 改行しない */
   white-space: nowrap;
-}
 
-.twitter::before {
-  content: "";
-  display: inline-block;
-  width: 30px;
-  height: 30px;
-  background-size: contain;
-  background-image: url(../img/twitter.png);
-}
-
-.youtube::before {
-  content: "";
-  display: inline-block;
-  width: 30px;
-  height: 30px;
-  background-size: contain;
-  background-image: url(../img/youtube.png);
+  font-weight: bolder;
+  text-shadow: black 0 0 5px;
 }
 
 .animation {

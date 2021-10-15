@@ -32,7 +32,7 @@ setInterval(() => {
   })
 
   socket.emit('Format', format)
-}, 5000)
+}, 3000)
 
 // 5秒毎にデータを送信する
 setInterval(() => {
@@ -41,4 +41,4 @@ setInterval(() => {
   })
 
   socket.emit('Layout', layout)
-}, 5000)
+}, 3000)

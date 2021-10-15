@@ -26,9 +26,28 @@ body::-webkit-scrollbar {
 }
 
 .common {
-  font-weight: bolder;
-  text-shadow: black 0 0 5px;
+}
 
-  /* 文字の行間を調節する */
-  line-height: 1.5;
+.twitterIcon::before {
+  content: "";
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  border-radius: 100%;
+  margin-right: 5px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-image: url(../img/twitter.png);
+}
+
+.youtubeIcon::before {
+  content: "";
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  border-radius: 100%;
+  margin-right: 5px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-image: url(../img/youtube.png);
 }
