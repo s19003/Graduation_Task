@@ -3,8 +3,9 @@
 ### 構成
 
 - サーバ<br>
-  app.js
-  twitter.js
+
+  - app.js
+  - twitter.js
 
 - フロント<br>
   メインとなる操作用画面
