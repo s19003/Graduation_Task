@@ -9,7 +9,7 @@ addEventListener('load', () => {
   sample.style.fontSize = Config.fontSize
 })
 
-fontSize.addEventListener('input', e => {
+fontSize.addEventListener('input', (e) => {
   sample.style.fontSize = `${e.target.value}px`
 })
 

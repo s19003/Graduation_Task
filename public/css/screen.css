@@ -25,11 +25,11 @@ body::-webkit-scrollbar {
   left: 0;
 }
 
-.common {
-}
+/* .common {
+} */
 
 .twitterIcon::before {
-  content: "";
+  content: '';
   display: inline-block;
   width: 30px;
   height: 30px;
@@ -41,7 +41,7 @@ body::-webkit-scrollbar {
 }
 
 .youtubeIcon::before {
-  content: "";
+  content: '';
   display: inline-block;
   width: 30px;
   height: 30px;

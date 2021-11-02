@@ -11,20 +11,20 @@ let fontColor = Config.fontColor
 // Socket
 // ==============================
 
-socket.on('Format', getFormat => {
+socket.on('Format', (getFormat) => {
   checkFormat(getFormat)
 
   // テスト用
   sampleCreate()
 })
 
-socket.on('Layout', getLayout => {
+socket.on('Layout', (getLayout) => {
   getLayout = JSON.parse(getLayout)
   fontSize = getLayout.size
 })
 
 // APIから受け取った時用
-socket.on('API', json => {
+socket.on('API', (json) => {
   const text = json.text
   createComment(text)
 })
@@ -34,7 +34,7 @@ socket.on('API', json => {
 // ==============================
 
 // フォーマットを切り替えるかどうか判定する関数
-const checkFormat = getFormat => {
+const checkFormat = (getFormat) => {
   getFormat = JSON.parse(getFormat).format
 
   // 選択中と違う場合、フォーマットを変更する
@@ -67,7 +67,7 @@ const notOverlap = () => {
   return `${randomHeight}px`
 }
 
-const createComment = text => {
+const createComment = (text) => {
   // ブラウザの横幅・縦幅
   const width = document.documentElement.clientWidth
   const height = document.documentElement.clientHeight

@@ -47,7 +47,7 @@ main {
 }
 
 .radio + label:after {
-  content: "";
+  content: '';
   display: inline-block;
   background-size: contain;
   width: 140px;
@@ -59,12 +59,12 @@ main {
   box-sizing: border-box;
 }
 
-.radio[value="niconico"] + label:after {
+.radio[value='niconico'] + label:after {
   background-image: url(../img/niconico.png);
   border-radius: 100%;
 }
 
-.radio[value="youtube"] + label:after {
+.radio[value='youtube'] + label:after {
   background-image: url(../img/youtube.png);
   border-radius: 100%;
 }
