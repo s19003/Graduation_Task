@@ -8,7 +8,8 @@ const io = require('socket.io')(server)
 // ==============================
 // Settings
 // ==============================
-app.use(express.static('public'))
+app.set('view engine', 'ejs')
+app.use(express.static('views'))
 app.use(express.json())
 
 // ==============================
@@ -19,7 +20,8 @@ app.get('/screen', (req, res) => {
 })
 
 app.get('/main', (req, res) => {
-  res.sendFile(__dirname + '/public/main.html')
+  // res.sendFile(__dirname + '/public/main.html')
+  res.render('./main.ejs')
 })
 
 // ==============================
@@ -44,8 +46,9 @@ io.on('connection', (socket) => {
 // ==============================
 // Listening
 // ==============================
+const ip = '172.16.41.93'
 const port = 3000
 server.listen(port, async () => {
-  console.log(`http://localhost:${port}/main`)
-  console.log(`http://localhost:${port}/screen`)
+  console.log(`http://${ip}:${port}/main`)
+  console.log(`http://${ip}:${port}/screen`)
 })
