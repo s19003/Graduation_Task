@@ -23,8 +23,14 @@
     </div>
     <%- include('./Main/ejs/_layout') %>
     <footer class="footer fixed-bottom py-3 bg-light">
-      <div class="d-flex justify-content-evenly">
-        <span class="text-muted">http://localhost:3000/screen/XXXXXXX</span>
+      <div class="container d-flex justify-content-evenly">
+        <input
+          class="form-control"
+          type="text"
+          placeholder="http://localhost:3000/screen/XXXXXXX"
+          aria-label="readonly"
+          readonly
+        />
         <button type="button" class="btn btn-outline-primary btn-sm">Copy</button>
       </div>
     </footer>

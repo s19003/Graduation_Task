@@ -1,7 +1,7 @@
 <div class="container">
   <main>
-    <div class="box">
-      <p>配信フォーマットの選択</p>
+    <p class="h3">配信フォーマットの選択</p>
+    <div class="container-fluid d-flex justify-content-center">
       <input
         type="radio"
         class="radio"
@@ -16,9 +16,11 @@
       >
     </div>
 
-    <div class="box">
-      <p>フォントサイズ</p>
-      <input class="slider fontSize" type="range" value="50" min="30" max="70" />
+    <label for="fontSize" class="h3 form-label mt-5">フォントサイズ</label>
+    <div class="container-fluid d-flex justify-content-evenly">
+      <p class="h5">小</p>
+      <input class="form-range" type="range" id="fontSize" value="50" min="30" max="70" step="1" />
+      <p class="h5">大</p>
     </div>
   </main>
 </div>

@@ -1,5 +1,5 @@
 const sample = document.querySelector('.sample')
-const fontSize = document.querySelector('.fontSize')
+const fontSize = document.querySelector('.form-range')
 const formats = document.getElementsByName('format')
 
 const socket = io()
