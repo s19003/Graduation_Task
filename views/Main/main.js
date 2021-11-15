@@ -6,7 +6,8 @@ const socket = io()
 
 // Config.jsから初期値(共通の値)を読み込む
 addEventListener('load', () => {
-  sample.style.fontSize = Config.fontSize
+  // sample.style.fontSize = Config.fontSize
+  console.log(document.cookie)
 })
 
 fontSize.addEventListener('input', (e) => {
