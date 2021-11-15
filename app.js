@@ -17,6 +17,7 @@ app.get('/screen', (req, res) => {
   res.sendFile(__dirname + '/public/screen.html')
 })
 
+// ルーティング
 app.get('/main', (req, res) => {
   if (req.cookies.id === undefined) {
     const id = require('uuid').v4()
@@ -37,11 +38,15 @@ app.get('/main', (req, res) => {
   res.render('./main.ejs')
 })
 
-// ==============================
-// Socket
-// ==============================
+app.get('/screen', (req, res) => {
+  res.sendFile(__dirname + '/public/screen.html')
+})
+
+// WebSocket
 io.on('connection', (socket) => {
   console.log('接続しました')
+  console.log(socket.rooms)
+  console.log(socket.id)
 
   socket.on('Layout', (layout) => {
     io.emit('Layout', layout)
@@ -56,7 +61,6 @@ io.on('connection', (socket) => {
   })
 })
 
-// ==============================
 // Listening
 // ==============================
 const ip = '172.16.41.93'
@@ -67,3 +71,10 @@ server.listen(port, async () => {
   console.log(`http://localhost:3000/main`)
   console.log(`http://localhost:3000/screen`)
 })
+
+// 関数
+const count = () => io.engine.clientsCount
+// setInterval(() => console.log(mainCount()), 3000)
+const getSessionID = () => {
+  return require('uuid').v4().toString()
+}
