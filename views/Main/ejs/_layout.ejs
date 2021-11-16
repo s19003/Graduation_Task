@@ -1,26 +1,64 @@
-<div class="container">
+<div class="container-sm d-flex flex-column justify-content-center">
   <main>
-    <p class="h3">配信フォーマットの選択</p>
-    <div class="container-fluid d-flex justify-content-center">
-      <input
-        type="radio"
-        class="radio"
-        id="niconico"
-        name="format"
-        value="niconico"
-        checked
-      /><label for="niconico">ニコニコ</label>
-      <input type="radio" class="radio" id="youtube" name="format" value="youtube" /><label
-        for="youtube"
-        >Youtube</label
-      >
+    <div class="container-ms mt-1">
+      <label for="twitter_tag" class="form-label">Twitter ハッシュタグ</label>
+      <div class="input-group mb-3">
+        <span class="input-group-text" id="basic-addon3">#</span>
+        <input type="text" class="form-control border border-info border-2 twitter_tag" id="twitter_tag" aria-describedby="basic-addon3">
+      </div>
     </div>
 
-    <label for="fontSize" class="h3 form-label mt-5">フォントサイズ</label>
-    <div class="container-fluid d-flex justify-content-evenly">
-      <p class="h5">小</p>
-      <input class="form-range" type="range" id="fontSize" value="50" min="30" max="70" step="1" />
-      <p class="h5">大</p>
+    <div class="container-ms mt-1">
+      <label for="youtube_url" class="form-label">Youtube URL</label>
+      <span class="input-group-text" id="basic-addon3">https://www.youtube.com/watch?v=</span>
+      <div class="input-group mb-3">
+        <input type="text" class="form-control border border-danger border-2 youtube_url" placeholder="" id="youtube_url" aria-describedby="basic-addon3">
+      </div>
+    </div>
+
+    <div class="container-fluid d-flex flex-column justify-content-center mt-3">
+      <div class="h3">配信フォーマットの選択</div>
+
+      <div class="container-fluid d-flex justify-content-center">
+        <input
+          type="radio"
+          class="radio"
+          id="niconico"
+          name="format"
+          value="niconico"
+          checked
+        /><label for="niconico">ニコニコ</label>
+        <input type="radio" class="radio" id="youtube" name="format" value="youtube" /><label
+          for="youtube"
+          >Youtube</label
+        >
+      </div>
+    </div>
+
+    <div class="container-ms">
+      <label for="fontSize" class="h3 form-label mt-5">フォントサイズ</label>
+      <div class="container-fluid d-flex justify-content-evenly">
+        <p class="h5">小</p>
+        <input class="form-range size" type="range" id="fontSize" min="20" max="70" step="10" />
+        <p class="h5">大</p>
+      </div>
+
+      <div class="container-ms">
+        <label for="opacity" class="h3 form-label mt-3">コメント透過</label>
+        <div class="container-fluid d-flex justify-content-evenly">
+          <p class="h5">小</p>
+          <input class="form-range opacity" type="range" id="opacity" min="20" max="100" step="10" />
+          <p class="h5">大</p>
+        </div>
+
+      <div class="container-ms">
+        <label for="weight" class="h3 form-label mt-3">フォントの太さ</label>
+        <div class="container-fluid d-flex justify-content-evenly">
+          <p class="h5">小</p>
+          <input class="form-range weight" type="range" id="weight" min="100" max="600" step="100" />
+          <p class="h5">大</p>
+        </div>
+    </div>
     </div>
   </main>
 </div>

@@ -13,21 +13,24 @@
     />
     <link rel="stylesheet" href="/Main/main.css" />
     <script src="/socket.io/socket.io.js"></script>
-    <!-- <script src="/Main/config.js"></script> -->
-    <script src="/Main/main.js" defer></script>
+    <!-- <script src="config.js"></script> -->
+    <script type="module" src="/Main/main.js" defer></script>
   </head>
   <body>
     <%- include('./Main/ejs/_nav') %>
     <div class="sticky_h d-flex justify-content-center align-items-start">
-      <span class="sticky sample d-flex justify-content-center align-items-center">HELLO</span>
+      <!-- <span class="sticky sample d-flex justify-content-center align-items-center">HELLO</span> -->
+      <div class="sticky d-flex justify-content-center align-items-center">
+        <p class="sample">HELLO</p>
+      </div>
     </div>
     <%- include('./Main/ejs/_layout') %>
     <footer class="footer fixed-bottom py-3 bg-light">
-      <div class="container d-flex justify-content-evenly">
+      <div class="container-sm d-flex justify-content-evenly">
         <input
-          class="form-control"
+          class="form-control url"
           type="text"
-          placeholder="http://localhost:3000/screen/XXXXXXX"
+          value="http://localhost:3000/screen/XXXXXXX"
           aria-label="readonly"
           readonly
         />

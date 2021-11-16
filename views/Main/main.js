@@ -1,20 +1,55 @@
-const sample = document.querySelector('.sample')
-const fontSize = document.querySelector('.form-range')
-const formats = document.getElementsByName('format')
+'use strict'
+
+import { config } from '../config.js'
 
 const socket = io()
+const sample = document.querySelector('.sample')
+const formats = document.getElementsByName('format')
+const size = document.querySelector('.size')
+const opacity = document.querySelector('.opacity')
+const weight = document.querySelector('.weight')
 
-// Config.jsから初期値(共通の値)を読み込む
+// ページの読み込み完了後に実行
 addEventListener('load', () => {
-  // sample.style.fontSize = Config.fontSize
-  console.log(document.cookie)
+  sample.style.fontSize = `${config.size}px`
+  sample.style.color = config.color
+  sample.style.fontWeight = config.weight
+  size.value = config.size
+  opacity.value = config.opacity
+  weight.value = config.weight
+
+  // cookie値を読み取り、コピー用のURLに貼り付ける
+  const cookie = document.cookie
+  const url = document.querySelector('.url')
+  url.value = `http://localhost:3000/screen?${cookie}`
 })
 
-fontSize.addEventListener('input', (e) => {
+// ####################
+// サンプル値の変更
+// ####################
+size.addEventListener('input', (e) => {
   sample.style.fontSize = `${e.target.value}px`
 })
 
-// formatのラジオボタンのvalueを取得する
+opacity.addEventListener('input', (e) => {
+  const opaPercent = e.target.value / 100
+  sample.style.opacity = `${opaPercent}`
+})
+
+weight.addEventListener('input', (e) => {
+  sample.style.fontWeight = e.target.value
+})
+
+// ラジオボタンの値を取得する
+Array.from(formats).map((e) =>
+  e.addEventListener('click', () => {
+    console.log(e.value)
+  })
+)
+
+// ####################
+// WebSocket
+// ####################
 const selectingFormat = () => {
   let format = ''
   for (let i = 0; i < formats.length; i++) {
@@ -33,7 +68,9 @@ setInterval(() => {
   })
 
   socket.emit('Format', format)
-}, 3000)
+
+  console.log(format)
+}, 10000)
 
 // 5秒毎にデータを送信する
 setInterval(() => {
@@ -42,4 +79,6 @@ setInterval(() => {
   })
 
   socket.emit('Layout', layout)
-}, 3000)
+
+  console.log(layout)
+}, 5000)

@@ -13,40 +13,29 @@ app.use(express.json()) // json値を読み取れるようにする
 app.use(cookieParser()) // cookie値を読み取れるようにする
 
 // Routing
-app.get('/screen', (req, res) => {
-  res.sendFile(__dirname + '/public/screen.html')
-})
-
-// ルーティング
 app.get('/main', (req, res) => {
   if (req.cookies.id === undefined) {
     const id = require('uuid').v4()
 
+    // 初回接続時に、cookieの作成
     res.cookie('id', id, {
-      maxAge: 60000,
+      maxAge: 31536000,
       httpOnly: false
     })
-
-    console.log('cookieを作成しました')
-  } else {
-    console.log(`id=${req.cookies.id}`)
   }
-
-  // const randomID = require('uuid').v4()
-  // console.log(randomID)
 
   res.render('./main.ejs')
 })
 
 app.get('/screen', (req, res) => {
-  res.sendFile(__dirname + '/public/screen.html')
+  const id = req.query
+  console.log(id)
+  // res.sendFile(__dirname + '/public/screen.html')
 })
 
-// WebSocket
+// Socket
 io.on('connection', (socket) => {
   console.log('接続しました')
-  console.log(socket.rooms)
-  console.log(socket.id)
 
   socket.on('Layout', (layout) => {
     io.emit('Layout', layout)
@@ -62,7 +51,6 @@ io.on('connection', (socket) => {
 })
 
 // Listening
-// ==============================
 const ip = '172.16.41.93'
 const port = 3000
 server.listen(port, async () => {
@@ -71,10 +59,3 @@ server.listen(port, async () => {
   console.log(`http://localhost:3000/main`)
   console.log(`http://localhost:3000/screen`)
 })
-
-// 関数
-const count = () => io.engine.clientsCount
-// setInterval(() => console.log(mainCount()), 3000)
-const getSessionID = () => {
-  return require('uuid').v4().toString()
-}

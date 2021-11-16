@@ -1,6 +1,10 @@
+'use strict'
+
 // 共通の設定(初期値)を記載しておくクラス
-class Config {
-  static fontSize = '50px' // フォントサイズ
-  static fontColor = 'white' // フォントカラー
-  static format = 'niconico' // フォーマット形式
+export const config = {
+  size: '50',
+  color: '#f6f6f6',
+  opacity: '100',
+  weight: '500',
+  format: 'niconico'
 }

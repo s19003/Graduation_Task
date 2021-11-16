@@ -10,7 +10,9 @@
   white-space: nowrap;
 
   font-weight: bolder;
-  text-shadow: black 0 0 5px;
+  text-shadow: black 0 0 3px;
+
+  opacity: 1;
 }
 
 .animation {
