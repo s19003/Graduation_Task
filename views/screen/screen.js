@@ -1,26 +1,39 @@
-// グローバルに使用する変数や定数
-const screen = document.querySelector('.screen')
+'use strict'
+
+import { config } from '../config.js'
+
 const socket = io()
+const screen = document.querySelector('.screen')
 
-let format = Config.format // "niconico"
+// クライアント識別用ID
+let id = ''
 
-let fontSize = Config.fontSize
-let fontColor = Config.fontColor
+let format = config.format
+let size = config.size
+let color = config.color
+let weight = config.weight
+let opacity = config.opacity
 
-// ==============================
-// Socket
-// ==============================
-
-socket.on('Format', (getFormat) => {
-  checkFormat(getFormat)
-
-  // テスト用
-  sampleCreate()
+// ページの読み込み完了後に実行
+addEventListener('load', () => {
+  const searchParams = new URLSearchParams(window.location.search)
+  id = searchParams.get('id')
 })
 
-socket.on('Layout', (getLayout) => {
-  getLayout = JSON.parse(getLayout)
-  fontSize = getLayout.size
+// ####################
+// WebSocket
+// ####################
+
+socket.on('Layout', (layout) => {
+  const getLayout = JSON.parse(layout)
+  const getId = getLayout.id
+
+  if (id === getId) {
+    size = getLayout.size
+    weight = getLayout.weight
+    opacity = getLayout.opacity
+    changeFormat(getLayout.format)
+  }
 })
 
 // APIから受け取った時用
@@ -34,11 +47,7 @@ socket.on('API', (json) => {
 // ==============================
 
 // フォーマットを切り替えるかどうか判定する関数
-const checkFormat = (getFormat) => {
-  getFormat = JSON.parse(getFormat).format
-
-  // 選択中と違う場合、フォーマットを変更する
-  // その際、スクリーンの子要素を削除し、初期化する。
+const changeFormat = (getFormat) => {
   if (format != getFormat) {
     screen.innerHTML = ''
   }

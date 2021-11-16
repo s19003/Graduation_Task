@@ -1,21 +1,35 @@
 <div class="container-sm d-flex flex-column justify-content-center">
   <main>
-    <div class="container-ms mt-1">
-      <label for="twitter_tag" class="form-label">Twitter ハッシュタグ</label>
-      <div class="input-group mb-3">
-        <span class="input-group-text" id="basic-addon3">#</span>
-        <input type="text" class="form-control border border-info border-2 twitter_tag" id="twitter_tag" aria-describedby="basic-addon3">
+    <!-- タグ -->
+    <div class="container-sm d-flex">
+      <div class="container-fluid mt-1">
+        <label for="twitter_tag" class="form-label">Twitter ハッシュタグ</label>
+        <div class="input-group mb-3 border border-info border-1 rounded">
+          <span class="input-group-text" id="basic-addon3">#</span>
+          <input
+            type="text"
+            class="form-control twitter_tag"
+            id="twitter_tag"
+            placeholder=""
+            aria-describedby="basic-addon3"
+          />
+        </div>
+      </div>
+      <div class="container-fluid mt-1">
+        <label for="youtube_url" class="form-label">Youtube URL</label>
+        <div class="input-group mb-3 border border-danger border-1">
+          <span class="input-group-text" id="basic-addon3">https://www.youtube.com/watch?v=</span>
+          <input
+            type="text"
+            class="form-control youtube_url"
+            id="youtube_url"
+            aria-describedby="basic-addon3"
+          />
+        </div>
       </div>
     </div>
 
-    <div class="container-ms mt-1">
-      <label for="youtube_url" class="form-label">Youtube URL</label>
-      <span class="input-group-text" id="basic-addon3">https://www.youtube.com/watch?v=</span>
-      <div class="input-group mb-3">
-        <input type="text" class="form-control border border-danger border-2 youtube_url" placeholder="" id="youtube_url" aria-describedby="basic-addon3">
-      </div>
-    </div>
-
+    <!-- フォーマット -->
     <div class="container-fluid d-flex flex-column justify-content-center mt-3">
       <div class="h3">配信フォーマットの選択</div>
 
@@ -35,30 +49,48 @@
       </div>
     </div>
 
-    <div class="container-ms">
-      <label for="fontSize" class="h3 form-label mt-5">フォントサイズ</label>
-      <div class="container-fluid d-flex justify-content-evenly">
-        <p class="h5">小</p>
-        <input class="form-range size" type="range" id="fontSize" min="20" max="70" step="10" />
-        <p class="h5">大</p>
-      </div>
-
-      <div class="container-ms">
-        <label for="opacity" class="h3 form-label mt-3">コメント透過</label>
+    <!-- レイアウト -->
+    <div class="container-fluid d-flex flex-column justify-content-center mt-3">
+      <div class="container-fluid">
+        <label for="fontSize" class="h3 form-label mt-5">フォントサイズ</label>
         <div class="container-fluid d-flex justify-content-evenly">
           <p class="h5">小</p>
-          <input class="form-range opacity" type="range" id="opacity" min="20" max="100" step="10" />
+          <input class="form-range size" type="range" id="fontSize" min="20" max="70" step="10" />
           <p class="h5">大</p>
         </div>
+      </div>
 
-      <div class="container-ms">
+      <div class="container-fluid">
         <label for="weight" class="h3 form-label mt-3">フォントの太さ</label>
         <div class="container-fluid d-flex justify-content-evenly">
           <p class="h5">小</p>
-          <input class="form-range weight" type="range" id="weight" min="100" max="600" step="100" />
+          <input
+            class="form-range weight"
+            type="range"
+            id="weight"
+            min="200"
+            max="600"
+            step="200"
+          />
           <p class="h5">大</p>
         </div>
-    </div>
+      </div>
+
+      <div class="container-fluid">
+        <label for="opacity" class="h3 form-label mt-3">透明度</label>
+        <div class="container-fluid d-flex justify-content-evenly">
+          <p class="h5">小</p>
+          <input
+            class="form-range opacity"
+            type="range"
+            id="opacity"
+            min="0.2"
+            max="1"
+            step="0.1"
+          />
+          <p class="h5">大</p>
+        </div>
+      </div>
     </div>
   </main>
 </div>

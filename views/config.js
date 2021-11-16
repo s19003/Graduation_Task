@@ -4,7 +4,7 @@
 export const config = {
   size: '50',
   color: '#f6f6f6',
-  opacity: '100',
-  weight: '500',
+  weight: '400',
+  opacity: '1',
   format: 'niconico'
 }

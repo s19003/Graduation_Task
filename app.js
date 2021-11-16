@@ -28,9 +28,7 @@ app.get('/main', (req, res) => {
 })
 
 app.get('/screen', (req, res) => {
-  const id = req.query
-  console.log(id)
-  // res.sendFile(__dirname + '/public/screen.html')
+  res.render('./screen.ejs')
 })
 
 // Socket
@@ -39,10 +37,6 @@ io.on('connection', (socket) => {
 
   socket.on('Layout', (layout) => {
     io.emit('Layout', layout)
-  })
-
-  socket.on('Format', (format) => {
-    io.emit('Format', format)
   })
 
   socket.on('disconnect', () => {

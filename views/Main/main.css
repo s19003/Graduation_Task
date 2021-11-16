@@ -15,6 +15,10 @@ main {
   width: 50%;
 }
 
+.form-control {
+  width: 95%;
+}
+
 /* ラジオボタン */
 .radio {
   display: none;
