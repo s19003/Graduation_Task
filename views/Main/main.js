@@ -7,11 +7,11 @@ const sample = document.querySelector('.sample')
 const size = document.querySelector('.size')
 const weight = document.querySelector('.weight')
 const opacity = document.querySelector('.opacity')
+const url = document.querySelector('.url')
 const formats = document.getElementsByName('format')
 
-// クライアント識別用ID
 let cookie = document.cookie
-
+let id = cookie.split('=')[1] // クライアント識別用ID
 let format = config.format
 
 // ページの読み込み完了後に実行
@@ -25,7 +25,6 @@ addEventListener('load', () => {
   opacity.value = config.opacity
 
   // cookie値を読み取り、コピー用のURLに貼り付ける
-  const url = document.querySelector('.url')
   url.value = `http://localhost:3000/screen?${cookie}`
 
   // レイアウトの制限を行う関数(初回実行)
@@ -33,7 +32,7 @@ addEventListener('load', () => {
 })
 
 // ####################
-// サンプル値の変更
+// 値の変更
 // ####################
 size.addEventListener('input', (e) => {
   sample.style.fontSize = `${e.target.value}px`
@@ -55,12 +54,17 @@ Array.from(formats).map((e) =>
   })
 )
 
+// URLをコピーするボタンの処理
+const copyButton = document.querySelector('.copy_button')
+copyButton.addEventListener('click', (e) => {
+  url.select()
+  document.execCommand('Copy') // 非推奨だけど仕方なく
+})
+
 // ####################
 // WebSocket
 // ####################
 setInterval(() => {
-  const id = cookie.split('=')[1]
-
   const layout = JSON.stringify({
     format: format,
     size: sample.style.fontSize,
@@ -70,8 +74,17 @@ setInterval(() => {
   })
 
   socket.emit('Layout', layout)
+}, 5000)
 
-  console.log(layout)
+// Twitterハッシュタグフォームの送信
+const twitterForm = document.querySelector('.twitter_tag')
+setInterval(() => {
+  const hashTag = JSON.stringify({
+    hashTag: twitterForm.value,
+    id: id
+  })
+
+  socket.emit('twitter', hashTag)
 }, 5000)
 
 // ####################

@@ -1,5 +1,8 @@
 'use strict'
 
+const Twitter = require('./Twitter/twitter')
+const twitter = new Twitter()
+
 const express = require('express')
 const app = express()
 const server = require('http').createServer(app)
@@ -37,6 +40,11 @@ io.on('connection', (socket) => {
 
   socket.on('Layout', (layout) => {
     io.emit('Layout', layout)
+  })
+
+  socket.on('twitter', (hashTag) => {
+    const tag = JSON.parse(hashTag).hashTag
+    twitter.getTweets(tag)
   })
 
   socket.on('disconnect', () => {

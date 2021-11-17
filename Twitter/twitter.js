@@ -9,39 +9,43 @@ const token =
 const endpointUrl = 'https://api.twitter.com/2/tweets/search/recent'
 
 class Twitter {
-  constructor () {
+  constructor() {
     this.tag = ''
     this.newest = ''
-    console.log('Twitterクラス参照開始')
   }
 
   // タグ判定
-  checkTag = tag => {
+  checkTag = (tag) => {
     if (tag == '') {
-      console.log('タグ判定１')
-      throw new Error('tagがありません')
+      this.tag = ''
+      this.newest = ''
+      console.log('タグがないので、取得できません')
+      return -1
     }
 
+    // 初回判定
     if (this.tag == '') {
       this.tag = tag
-      console.log('タグ判定２')
-      return
+      console.log('新しいタグを取得しました')
+      return 0
     }
 
+    // 前回と同じタグの時
     if (this.tag == tag) {
-      console.log('タグ判定３')
-      return
+      console.log('前回と同じタグで取得します')
+      return 1
     }
 
+    // 前回と異なるタグの時
     if (this.tag != tag) {
       this.tag = tag
       this.newest = ''
-      console.log('タグ判定４')
-      return
+      console.log('前回と異なるタグを検知しました')
+      return 0
     }
   }
 
-  getRequest = async (tag, newest) => {
+  getRequest = async (tag, newest = '') => {
     if (newest == '') {
       const params = {
         query: `#${tag} -is:retweet`,
@@ -84,147 +88,39 @@ class Twitter {
     }
   }
 
-  getTweets = async tag => {
+  getTweets = async (tag = '') => {
     try {
-      this.checkTag(tag)
+      const T = this.checkTag(tag)
+      let tweets = ''
 
-      const tweets = await this.getRequest(tag, this.newest)
-
-      if (tweets.meta.result_count > 0) {
-        this.newest = tweets.meta.newest_id
+      switch (T) {
+        case -1:
+          tweets = ''
+          break
+        case 0:
+          const meta = await this.getRequest(tag)
+          if (meta.meta.result_count > 0) {
+            this.newest = tweets.meta.newest_id
+          }
+          break
+        case 1:
+          tweets = await this.getRequest(tag, this.newest_id)
+          break
       }
 
       return tweets
+
+      // const tweets = await this.getRequest(tag, this.newest)
+
+      // if (tweets.meta.result_count > 0) {
+      //   this.newest = tweets.meta.newest_id
+      // }
+
+      // return tweets
     } catch (e) {
       console.log(e)
     }
   }
-
-  // // 最初の10件を取得するメソッド
-  // // newestを取得するために使用する
-  // firstGetRequest = async tag => {
-  //   const params = {
-  //     query: `#${tag} -is:retweet`,
-  //     'tweet.fields': 'author_id',
-  //     since_id: `${newest}`
-  //   }
-
-  //   const res = await needle('get', endpointUrl, params, {
-  //     headers: {
-  //       'User-Agent': 'v2RecentSearchJS',
-  //       authorization: `Bearer ${token}`
-  //     }
-  //   })
-
-  //   if (res.body) {
-  //     return res.body
-  //   } else {
-  //     throw new Error('リクエストに失敗しました。')
-  //   }
-  // }
-
-  // // GetRequestメソッドを動かし、
-  // // リスポンス(Tweets)を受け取るメソッド
-  // getTweets = async tag => {
-  //   // 初回(タグが空白の場合)
-  //   if (tag == '' && this.tag == '' && this.newest == '') {
-  //     console.log('初回のタグが空白!!')
-  //     return
-  //   }
-
-  //   // 2回目以降(タグが空白の場合)
-  //   if (
-  //     (tag == '' && this.tag != '') ||
-  //     (tag == '' && this.tag != '' && this.newest != '')
-  //   ) {
-  //     console.log('2回目以降のタグが空白!!')
-  //     this.tag = ''
-  //     this.newest = ''
-  //     return
-  //   }
-
-  //   // 初回目の取得
-  //   if (tag != '' && this.tag == '' && this.newest == '') {
-  //     try {
-  //       const tweets = await this.firstGetRequest(tag)
-  //       this.tag = tag
-
-  //       if (tweets.meta.result_count > 0) {
-  //         this.newest = tweets.meta.newest_id
-  //         console.log('newest_idが設定されました')
-  //       }
-
-  //       console.log('OK')
-  //       return tweets
-  //     } catch (e) {
-  //       console.log('Tweetsの取得に失敗しました。')
-  //       return e
-  //     }
-  //   }
-
-  //   if (this.tag == tag) {
-  //     console.log('タグが同じです。')
-  //   } else {
-  //     console.log('タグが違います。')
-  //   }
-
-  //   if (tag != this.tag) {
-  //     try {
-  //       const tweets = await this.firstGetRequest(tag)
-  //       this.tag = tag
-  //       this.newest = ''
-
-  //       if (tweets.meta.result_count > 0) {
-  //         this.newest = tweets.meta.newest_id
-  //         console.log('newest_idが設定されました')
-  //       }
-
-  //       console.log('OK')
-  //       return tweets
-  //     } catch (e) {
-  //       console.log('Tweetsの取得に失敗しました。')
-  //       return e
-  //     }
-  //   }
-
-  //   if (tag == this.tag && this.newest == '') {
-  //     try {
-  //       const tweets = await this.firstGetRequest(tag)
-  //       this.tag = tag
-  //       this.newest = ''
-
-  //       if (tweets.meta.result_count > 0) {
-  //         this.newest = tweets.meta.newest_id
-  //         console.log('newest_idが設定されました')
-  //       }
-
-  //       console.log('OK')
-  //       return tweets
-  //     } catch (e) {
-  //       console.log('Tweetsの取得に失敗しました。')
-  //       return e
-  //     }
-  //   }
-
-  //   if (tag == this.tag && this.newest != '') {
-  //     try {
-  //       const tweets = await this.firstGetRequest(tag)
-  //       this.tag = tag
-  //       this.newest = ''
-
-  //       if (tweets.meta.result_count > 0) {
-  //         this.newest = tweets.meta.newest_id
-  //         console.log('newest_idが設定されました')
-  //       }
-
-  //       console.log('OK')
-  //       return tweets
-  //     } catch (e) {
-  //       console.log('Tweetsの取得に失敗しました。')
-  //       return e
-  //     }
-  //   }
-  // }
 
   getString = () => {
     console.log(`this.tag=${this.tag}`)
