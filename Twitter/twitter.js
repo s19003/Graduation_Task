@@ -1,11 +1,6 @@
-// 接続に必要なモジュール
 const needle = require('needle')
-
-// APIに必要なトークン
 const token =
   'AAAAAAAAAAAAAAAAAAAAALLrPgEAAAAAB3OxZwMf%2F7CKsr1YHsr3RTslT0A%3DQ0SpG0yAaNmHL5tf7aHbHdb1fzS2ov2bo1Yevy6pr0NjJ2JzM8'
-
-// エンドポイントURL(接続先)
 const endpointUrl = 'https://api.twitter.com/2/tweets/search/recent'
 
 class Twitter {
@@ -14,25 +9,63 @@ class Twitter {
     this.newest = ''
   }
 
+  getTweets = async (tag = '') => {
+    try {
+      const T = this.checkTag(tag)
+      let tweets = ''
+
+      switch (T) {
+        case -1:
+          break
+        case 0:
+          const meta = await this.getRequest(tag)
+          if (meta.meta.newest_id !== undefined) {
+            this.newest = meta.meta.newest_id
+          }
+          break
+        case 1:
+          tweets = await this.getRequest(tag, this.newest)
+          if (tweets.meta.newest_id !== undefined) {
+            this.newest = tweets.meta.newest_id
+          }
+          console.log(tweets)
+          break
+      }
+
+      return tweets
+
+      // const tweets = await this.getRequest(tag, this.newest)
+
+      // if (tweets.meta.result_count > 0) {
+      //   this.newest = tweets.meta.newest_id
+      // }
+
+      // return tweets
+    } catch (e) {
+      console.log(e)
+    }
+  }
+
   // タグ判定
   checkTag = (tag) => {
     if (tag == '') {
       this.tag = ''
       this.newest = ''
-      console.log('タグがないので、取得できません')
+      console.log('初期化')
       return -1
     }
 
     // 初回判定
     if (this.tag == '') {
       this.tag = tag
-      console.log('新しいタグを取得しました')
+      this.newest = ''
+      console.log('初回入力')
       return 0
     }
 
     // 前回と同じタグの時
     if (this.tag == tag) {
-      console.log('前回と同じタグで取得します')
+      console.log('同じタグ')
       return 1
     }
 
@@ -40,7 +73,7 @@ class Twitter {
     if (this.tag != tag) {
       this.tag = tag
       this.newest = ''
-      console.log('前回と異なるタグを検知しました')
+      console.log('変更')
       return 0
     }
   }
@@ -85,40 +118,6 @@ class Twitter {
       } else {
         throw new Error('リクエストに失敗しました。')
       }
-    }
-  }
-
-  getTweets = async (tag = '') => {
-    try {
-      const T = this.checkTag(tag)
-      let tweets = ''
-
-      switch (T) {
-        case -1:
-          tweets = ''
-          break
-        case 0:
-          const meta = await this.getRequest(tag)
-          if (meta.meta.result_count > 0) {
-            this.newest = tweets.meta.newest_id
-          }
-          break
-        case 1:
-          tweets = await this.getRequest(tag, this.newest_id)
-          break
-      }
-
-      return tweets
-
-      // const tweets = await this.getRequest(tag, this.newest)
-
-      // if (tweets.meta.result_count > 0) {
-      //   this.newest = tweets.meta.newest_id
-      // }
-
-      // return tweets
-    } catch (e) {
-      console.log(e)
     }
   }
 
