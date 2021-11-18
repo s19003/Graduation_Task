@@ -3,10 +3,9 @@ const Twitter = require('./twitter')
 let twitter = new Twitter()
 
 setInterval(async () => {
-  const tweets = twitter.getTweets('ITカレッジ沖faefda縄')
+  const tweets = twitter.getTweets('猫')
 }, 3000)
 
 // setInterval(async () => {
-//   console.log('変更')
-//   console.log(twitter.getTweets(''))
+//   twitter.getTweets('')
 // }, 10000)

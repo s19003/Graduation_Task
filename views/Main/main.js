@@ -87,6 +87,10 @@ setInterval(() => {
   socket.emit('twitter', hashTag)
 }, 5000)
 
+socket.on('disconnect', (reason) => {
+  socket.disconnect()
+})
+
 // ####################
 // 関数
 // ####################

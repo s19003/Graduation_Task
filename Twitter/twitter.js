@@ -33,14 +33,6 @@ class Twitter {
       }
 
       return tweets
-
-      // const tweets = await this.getRequest(tag, this.newest)
-
-      // if (tweets.meta.result_count > 0) {
-      //   this.newest = tweets.meta.newest_id
-      // }
-
-      // return tweets
     } catch (e) {
       console.log(e)
     }
@@ -79,53 +71,34 @@ class Twitter {
   }
 
   getRequest = async (tag, newest = '') => {
+    let params
+    let res
     if (newest == '') {
-      const params = {
+      params = {
         query: `#${tag} -is:retweet`,
         'tweet.fields': 'author_id'
       }
-
-      const res = await needle('get', endpointUrl, params, {
-        headers: {
-          'User-Agent': 'v2RecentSearchJS',
-          authorization: `Bearer ${token}`
-        }
-      })
-
-      if (res.body) {
-        return res.body
-      } else {
-        throw new Error('リクエストに失敗しました。')
-      }
-    }
-
-    if (newest != '') {
-      const params = {
+    } else {
+      params = {
         query: `#${tag} -is:retweet`,
         'tweet.fields': 'author_id',
         since_id: `${newest}`
       }
-
-      const res = await needle('get', endpointUrl, params, {
-        headers: {
-          'User-Agent': 'v2RecentSearchJS',
-          authorization: `Bearer ${token}`
-        }
-      })
-
-      if (res.body) {
-        return res.body
-      } else {
-        throw new Error('リクエストに失敗しました。')
-      }
     }
-  }
 
-  getString = () => {
-    console.log(`this.tag=${this.tag}`)
-    console.log(`this.newest=${this.newest}`)
+    res = await needle('get', endpointUrl, params, {
+      headers: {
+        'User-Agent': 'v2RecentSearchJS',
+        authorization: `Bearer ${token}`
+      }
+    })
+
+    if (res.body) {
+      return res.body
+    } else {
+      throw new Error('リクエストに失敗しました。')
+    }
   }
 }
 
-// エクスポート
 module.exports = Twitter
