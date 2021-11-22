@@ -79,12 +79,22 @@ setInterval(() => {
 // Twitterハッシュタグフォームの送信
 const twitterForm = document.querySelector('.twitter_tag')
 setInterval(() => {
-  const hashTag = JSON.stringify({
+  const data = JSON.stringify({
     hashTag: twitterForm.value,
     id: id
   })
 
-  socket.emit('twitter', hashTag)
+  socket.emit('Twitter', data)
+}, 5000)
+
+const youtubeForm = document.querySelector('.youtube_url')
+setInterval(() => {
+  const data = JSON.stringify({
+    youtubeId: youtubeForm.value,
+    id: id
+  })
+
+  socket.emit('Youtube', data)
 }, 5000)
 
 socket.on('disconnect', (reason) => {

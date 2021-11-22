@@ -43,7 +43,6 @@ class Twitter {
     if (tag == '') {
       this.tag = ''
       this.newest = ''
-      console.log('初期化')
       return -1
     }
 
@@ -51,13 +50,11 @@ class Twitter {
     if (this.tag == '') {
       this.tag = tag
       this.newest = ''
-      console.log('初回入力')
       return 0
     }
 
     // 前回と同じタグの時
     if (this.tag == tag) {
-      console.log('同じタグ')
       return 1
     }
 
@@ -65,7 +62,6 @@ class Twitter {
     if (this.tag != tag) {
       this.tag = tag
       this.newest = ''
-      console.log('変更')
       return 0
     }
   }

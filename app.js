@@ -3,6 +3,9 @@
 const Twitter = require('./Twitter/twitter')
 const twitter = new Twitter()
 
+const Youtube = require('./Youtube/youtube.js')
+const youtube = new Youtube()
+
 const express = require('express')
 const app = express()
 const server = require('http').createServer(app)
@@ -42,9 +45,14 @@ io.on('connection', (socket) => {
     io.emit('Layout', layout)
   })
 
-  socket.on('twitter', (hashTag) => {
-    const tag = JSON.parse(hashTag).hashTag
+  socket.on('Twitter', (data) => {
+    const tag = JSON.parse(data).hashTag
     twitter.getTweets(tag)
+  })
+
+  socket.on('Youtube', (data) => {
+    const id = JSON.parse(data).youtubeId
+    youtube.getChatId(id)
   })
 
   socket.on('disconnect', () => {
