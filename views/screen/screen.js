@@ -5,8 +5,7 @@ import { config } from '../config.js'
 const socket = io()
 const screen = document.querySelector('.screen')
 
-// クライアント識別用ID
-let id = ''
+let id = '' // クライアント識別ID
 
 let format = config.format
 let size = config.size
@@ -156,14 +155,4 @@ const createComment = (text) => {
 
       break
   }
-}
-
-// 開発用のサンプルコメント作成関数
-const sampleCreate = () => {
-  const test = 'テスト'.repeat(Math.floor(Math.random() * 10))
-  const randomTime = Math.floor(Math.random() * 5000)
-
-  setTimeout(() => {
-    createComment(`${test}${randomTime}`)
-  }, randomTime)
 }
