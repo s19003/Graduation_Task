@@ -1,84 +1,59 @@
 const needle = require('needle')
-const token =
-  'AAAAAAAAAAAAAAAAAAAAALLrPgEAAAAAB3OxZwMf%2F7CKsr1YHsr3RTslT0A%3DQ0SpG0yAaNmHL5tf7aHbHdb1fzS2ov2bo1Yevy6pr0NjJ2JzM8'
-const endpointUrl = 'https://api.twitter.com/2/tweets/search/recent'
 
 class Twitter {
   constructor() {
-    this.tag = ''
-    this.newest = ''
+    this.hashTag = ''
+    this.newestId = ''
   }
 
-  getTweets = async (tag = '') => {
+  getTweets = async (hashTag) => {
     try {
-      const T = this.checkTag(tag)
-      let tweets = ''
+      if (this.hashTag != hashTag) {
+        this.newestId = ''
+        const tweets = await this.getRequest(hashTag, this.newestId)
+        const meta = tweets.meta
 
-      switch (T) {
-        case -1:
-          break
-        case 0:
-          const meta = await this.getRequest(tag)
-          if (meta.meta.newest_id !== undefined) {
-            this.newest = meta.meta.newest_id
-          }
-          break
-        case 1:
-          tweets = await this.getRequest(tag, this.newest)
-          if (tweets.meta.newest_id !== undefined) {
-            this.newest = tweets.meta.newest_id
-          }
-          console.log(tweets)
-          break
+        if (meta.result_count) {
+          this.newestId = meta.newest_id
+        }
+
+        this.hashTag = hashTag
+
+        return 0
+      } else {
+        const tweets = await this.getRequest(hashTag, this.newestId)
+        const meta = tweets.meta
+
+        if (meta.result_count) {
+          this.newestId = meta.newest_id
+        } else {
+          return 0
+        }
+
+        return tweets
       }
-
-      return tweets
     } catch (e) {
       console.log(e)
     }
   }
 
-  // タグ判定
-  checkTag = (tag) => {
-    if (tag == '') {
-      this.tag = ''
-      this.newest = ''
-      return -1
-    }
-
-    // 初回判定
-    if (this.tag == '') {
-      this.tag = tag
-      this.newest = ''
-      return 0
-    }
-
-    // 前回と同じタグの時
-    if (this.tag == tag) {
-      return 1
-    }
-
-    // 前回と異なるタグの時
-    if (this.tag != tag) {
-      this.tag = tag
-      this.newest = ''
-      return 0
-    }
-  }
-
-  getRequest = async (tag, newest = '') => {
+  getRequest = async (hashTag, newestId) => {
     let params
     let res
-    if (newest == '') {
+    const endpointUrl = 'https://api.twitter.com/2/tweets/search/recent'
+    const token =
+      'AAAAAAAAAAAAAAAAAAAAALLrPgEAAAAAB3OxZwMf%2F7CKsr1YHsr3RTslT0A%3DQ0SpG0yAaNmHL5tf7aHbHdb1fzS2ov2bo1Yevy6pr0NjJ2JzM8'
+
+    if (!newestId) {
       params = {
-        query: `#${tag} -is:retweet`,
+        query: `#${hashTag} -is:retweet`,
         'tweet.fields': 'author_id'
       }
     } else {
       params = {
-        query: `#${tag} -is:retweet`,
+        query: `#${hashTag} -is:retweet`,
         'tweet.fields': 'author_id',
-        since_id: `${newest}`
+        since_id: `${newestId}`
       }
     }
 
@@ -91,8 +66,6 @@ class Twitter {
 
     if (res.body) {
       return res.body
-    } else {
-      throw new Error('リクエストに失敗しました。')
     }
   }
 }

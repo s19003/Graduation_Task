@@ -37,9 +37,12 @@ socket.on('Layout', (layout) => {
 })
 
 // APIから受け取った時用
-socket.on('API', (json) => {
-  const text = json.text
-  createComment(text)
+socket.on('Tweets', (tweets) => {
+  console.log(tweets)
+})
+
+socket.on('Chats', (chats) => {
+  console.log(chats)
 })
 
 // ==============================
