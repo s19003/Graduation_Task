@@ -48,15 +48,13 @@ io.on('connection', (socket) => {
   socket.on('Twitter', async (json) => {
     const hashTag = JSON.parse(json).hashTag
     const tweets = await twitter.getTweets(hashTag)
-    console.log(tweets)
-    // io.emit('Tweets', tweets)
+    io.emit('Tweets', tweets)
   })
 
   socket.on('Youtube', async (json) => {
     const id = JSON.parse(json).youtubeId
     const chats = await youtube.getChatId(id)
     io.emit('Chats', chats)
-    console.log(chats)
   })
 
   socket.on('disconnect', () => {
