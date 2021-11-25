@@ -30,7 +30,7 @@ node app.js
     - Socket.IO
     - ejs
   - リポジトリ
-    - views/main\* <- メイン画面
-    - views/screen\* <- スクリーン画面
+    - views/main\* <-- メイン画面
+    - views/screen\* <-- スクリーン画面
     - img
-    - config.js <- 初期値設定 js
+    - config.js <-- 初期値設定 js
