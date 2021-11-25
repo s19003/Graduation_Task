@@ -1,9 +1,9 @@
 'use strict'
 
-const Twitter = require('./Twitter/twitter')
+const Twitter = require('./API/twitter')
 const twitter = new Twitter()
 
-const Youtube = require('./Youtube/youtube.js')
+const Youtube = require('./API/youtube.js')
 const youtube = new Youtube()
 
 const express = require('express')
