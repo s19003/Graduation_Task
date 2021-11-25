@@ -26,3 +26,11 @@ node app.js
     - API/twitter.js <-- tweet 取得
     - API/youtube.js <-- chat 取得
 - フロント
+  - 使用ライブラリ
+    - Socket.IO
+    - ejs
+  - リポジトリ
+    - views/main\* <- メイン画面
+    - views/screen\* <- スクリーン画面
+    - img
+    - config.js <- 初期値設定 js
