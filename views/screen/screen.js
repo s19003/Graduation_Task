@@ -37,16 +37,48 @@ socket.on('Layout', (layout) => {
 
 // APIから受け取った時用
 socket.on('Tweets', (tweets) => {
-  console.log(tweets)
+  if (tweets) {
+    const length = tweets.data.length
+
+    let tweetsArray = Array(length)
+    for (let i = 0; i < length; i++) {
+      tweetsArray[i] = tweets.data[i].text
+    }
+
+    for (let tweet of tweetsArray) {
+      tweet = tweet.replace(/[#, ＃].*/g, '')
+      tweet = tweet.replace(/https?:\/\/[\w/:%#\$&\?\(\)~\.=\+\-]+/, '')
+
+      randomTime(tweet, 'twitter')
+    }
+  }
 })
 
 socket.on('Chats', (chats) => {
-  console.log(chats)
+  if (chats) {
+    try {
+      const items = chats.items
+      const length = items.length
+
+      let chatsArray = Array(length)
+      if (length) {
+        for (let i = 0; i < length; i++) {
+          chatsArray[i] = items[i].snippet.textMessageDetails.messageText
+        }
+      }
+
+      for (const chat of chatsArray) {
+        randomTime(chat, 'youtube')
+      }
+    } catch (e) {
+      console.log(e)
+    }
+  }
 })
 
-// ==============================
+// ####################
 // 関数
-// ==============================
+// ####################
 
 // フォーマットを切り替えるかどうか判定する関数
 const changeFormat = (getFormat) => {
@@ -64,95 +96,70 @@ const changeFormat = (getFormat) => {
   format = getFormat
 }
 
-// 高さが重ならないように求める関数
-let preHeight = -1
-const notOverlap = () => {
-  let randomHeight = Math.round(Math.random() * 500)
+// ランダムな高さを返す関数
+const randomHeight = () => `${Math.round(Math.random() * 500)}px`
 
-  // 前のコメントが近い場合はもう一度計算する
-  if (preHeight - 100 < randomHeight && randomHeight < preHeight + 100) {
-    notOverlap()
-  }
-
-  preHeight = randomHeight
-  return `${randomHeight}px`
-}
-
-const createComment = (text) => {
-  // ブラウザの横幅・縦幅
+// コメント作成関数
+const createComment = (text, media) => {
+  // ブラウザサイズ
   const width = document.documentElement.clientWidth
   const height = document.documentElement.clientHeight
-  // ランダムなアイコン
-  const icon = Math.round(Math.random())
 
-  switch (format) {
-    case 'niconico':
-      const Ncomment = document.createElement('div')
-      Ncomment.innerHTML = text
-      Ncomment.style.fontSize = fontSize
-      Ncomment.style.color = fontColor
+  if (format == 'niconico') {
+    const comment = document.createElement('div')
+    comment.innerHTML = text
 
-      // Ncomment.classList.add('common')
-      Ncomment.classList.add('niconico')
+    // スタイルを指定
+    comment.style.color = color
+    comment.style.fontSize = size
+    comment.style.fontWeight = weight
+    comment.style.opacity = opacity
+    comment.classList.add('niconico')
 
-      // TwitterIcon or YoutubeIcon
-      switch (icon) {
-        case 0:
-          Ncomment.classList.add('twitterIcon')
-          break
-        case 1:
-          Ncomment.classList.add('youtubeIcon')
-          break
-      }
+    mediaIcon(comment, media)
+    screen.appendChild(comment)
 
-      // アニメーションクラスを設定するために、
-      // 要素を追加しておく必要がある。
-      screen.appendChild(Ncomment)
+    // アニメーションの追加
+    comment.style.left = `${width}px`
+    comment.style.top = randomHeight()
 
-      // 画面の右側の位置を取得する
-      Ncomment.style.left = `${width}px`
+    const animationWidth = `-${width + comment.clientWidth}px`
+    comment.style.setProperty('--translateX', animationWidth)
 
-      // 高さをランダムにする
-      Ncomment.style.top = notOverlap()
+    comment.classList.add('animation')
 
-      // 横幅とコメント幅を求めることで、
-      // 移動する範囲を取得し、:rootに設定する
-      const animationWidth = `-${width + Ncomment.clientWidth}px`
-      Ncomment.style.setProperty('--translateX', animationWidth)
+    // コメントの削除
+    setTimeout(() => comment.remove(), 30000)
+  } else if (format == 'youtube') {
+    const comment = document.createElement('div')
+    comment.innerHTML = text
 
-      Ncomment.classList.add('animation')
+    comment.style.color = color
+    comment.style.fontWeight = weight
 
-      // 30秒後に要素を削除(変更の可能性あり)
-      setTimeout(() => Ncomment.remove(), 30000)
-      break
-    case 'youtube':
-      const Ycomment = document.createElement('div')
-      Ycomment.innerHTML = text
-      // Ycomment.style.fontSize = fontSize
-      // Ycomment.style.lineHeight = fontSize
-      // Ycomment.style.color = fontColor
+    comment.classList.add('youtube')
 
-      // Ycomment.classList.add('common')
-      Ycomment.classList.add('youtube')
+    mediaIcon(comment, media)
 
-      // TwitterIcon or YoutubeIcon
-      switch (icon) {
-        case 0:
-          Ycomment.classList.add('twitterIcon')
-          break
-        case 1:
-          Ycomment.classList.add('youtubeIcon')
-          break
-      }
+    const container = document.querySelector('.container')
+    container.appendChild(comment)
 
-      const container = document.querySelector('.container')
-      container.appendChild(Ycomment)
-
-      // スクロールしたら位置が変わるようにする
-      container.scrollTop = container.scrollHeight
-
-      // setTimeout(() => Ycomment.remove(), 60000)
-
-      break
+    container.scrollTop = container.scrollHeight
   }
+}
+
+const mediaIcon = (comment, media) => {
+  switch (media) {
+    case 'twitter':
+      return comment.classList.add('twitterIcon')
+    case 'youtube':
+      return comment.classList.add('youtubeIcon')
+  }
+}
+
+const randomTime = (comment, media) => {
+  const random = Math.round(Math.random() * 3000)
+  setTimeout(() => {
+    createComment(comment, media)
+  }, random)
 }

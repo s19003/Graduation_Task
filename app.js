@@ -53,7 +53,12 @@ io.on('connection', (socket) => {
 
   socket.on('Youtube', async (json) => {
     const id = JSON.parse(json).youtubeId
-    const chats = await youtube.getChatId(id)
+
+    const pattern = '^(https?://)?(www.)?(youtube.com|youtu.?be)/.+$'
+    const result = id.match(pattern)[0]
+    const youtubeId = result.slice(-11)
+
+    const chats = await youtube.getChatId(youtubeId)
     io.emit('Chats', chats)
   })
 
