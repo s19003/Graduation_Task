@@ -12,6 +12,7 @@ npm install
 
 ```
 node app.js
+>>> http://localhost:3000/main
 ```
 
 ### 構成
@@ -23,8 +24,8 @@ node app.js
     - Socket.IO
   - リポジトリ
     - app.js
-    - API/twitter.js <-- tweet 取得
-    - API/youtube.js <-- chat 取得
+    - API/twitter.js <-- TwitterAPI
+    - API/youtube.js <-- YoutubeAPI
 - フロント
   - 使用ライブラリ
     - Socket.IO
@@ -32,5 +33,5 @@ node app.js
   - リポジトリ
     - views/main\* <-- メイン画面
     - views/screen\* <-- スクリーン画面
-    - img
+    - img <-- 画像
     - config.js <-- 初期値設定 js
