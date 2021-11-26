@@ -47,7 +47,7 @@ socket.on('Tweets', (tweets) => {
 
     for (let tweet of tweetsArray) {
       tweet = tweet.replace(/[#, ＃].*/g, '')
-      tweet = tweet.replace(/https?:\/\/[\w/:%#\$&\?\(\)~\.=\+\-]+/, '')
+      tweet = tweet.replace(/https?:\/\/[\w/:%#\$&\?\(\)~\.=\+\-]+/g, '')
 
       randomTime(tweet, 'twitter')
     }
@@ -158,7 +158,7 @@ const mediaIcon = (comment, media) => {
 }
 
 const randomTime = (comment, media) => {
-  const random = Math.round(Math.random() * 3000)
+  const random = Math.round(Math.random() * 7000)
   setTimeout(() => {
     createComment(comment, media)
   }, random)
