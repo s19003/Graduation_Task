@@ -22,6 +22,7 @@ class Youtube {
 
         if (this.activeLiveChatId != activeLiveChatId) {
           this.activeLiveChatId = activeLiveChatId
+          this.nextPageToken = ''
           const chatMessages = await this.getChatMessages(activeLiveChatId, this.nextPageToken)
           this.nextPageToken = chatMessages.nextPageToken
         } else {

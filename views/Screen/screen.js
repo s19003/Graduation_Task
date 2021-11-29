@@ -70,6 +70,8 @@ socket.on('Chats', (chats) => {
       for (const chat of chatsArray) {
         randomTime(chat, 'youtube')
       }
+
+      console.log(chatsArray)
     } catch (e) {
       console.log(e)
     }
