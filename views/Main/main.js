@@ -11,7 +11,7 @@ const url = document.querySelector('.url')
 const formats = document.getElementsByName('format')
 
 let cookie = document.cookie
-let id = cookie.split('=')[1] // クライアント識別用ID
+let clientId = cookie.split('=')[1] // クライアント識別用ID
 let format = config.format
 
 // ページの読み込み完了後に実行
@@ -70,7 +70,7 @@ setInterval(() => {
     size: sample.style.fontSize,
     weight: sample.style.fontWeight,
     opacity: sample.style.opacity,
-    id: id
+    id: clientId
   })
 
   socket.emit('Layout', layout)
@@ -79,24 +79,24 @@ setInterval(() => {
 const twitterForm = document.querySelector('.twitter_tag')
 setInterval(() => {
   if (twitterForm.value) {
-    const json = JSON.stringify({
-      hashTag: twitterForm.value,
-      id: id
-    })
+    const hashTag = twitterForm.value
 
-    socket.emit('Twitter', json)
+    socket.emit('Twitter', hashTag, clientId)
   }
 }, 5000)
 
 const youtubeForm = document.querySelector('.youtube_url')
 setInterval(() => {
-  if (youtubeForm.value) {
-    const json = JSON.stringify({
-      youtubeId: youtubeForm.value,
-      id: id
-    })
+  try {
+    if (youtubeForm.value) {
+      const value = youtubeForm.value
+      const pattern = '^(https?://)?(www.)?(youtube.com|youtu.?be)/.+$'
+      const youtubeId = value.match(pattern)[0].slice(-11)
 
-    socket.emit('Youtube', json)
+      socket.emit('Youtube', youtubeId, clientId)
+    }
+  } catch (e) {
+    console.log('youtube URL Error')
   }
 }, 5000)
 

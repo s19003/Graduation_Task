@@ -36,45 +36,49 @@ socket.on('Layout', (layout) => {
 })
 
 // APIから受け取った時用
-socket.on('Tweets', (tweets) => {
-  if (tweets) {
-    const length = tweets.data.length
+socket.on('Tweets', (tweets, clientId) => {
+  if (compareId(clientId)) {
+    if (tweets) {
+      const length = tweets.data.length
 
-    let tweetsArray = Array(length)
-    for (let i = 0; i < length; i++) {
-      tweetsArray[i] = tweets.data[i].text
+      let tweetsArray = Array(length)
+      for (let i = 0; i < length; i++) {
+        tweetsArray[i] = tweets.data[i].text
+      }
+
+      for (let tweet of tweetsArray) {
+        tweet = tweet.replace(/[#, ＃].*/g, '')
+        tweet = tweet.replace(/https?:\/\/[\w/:%#\$&\?\(\)~\.=\+\-]+/g, '')
+
+        randomTime(tweet, 'twitter')
+      }
     }
-
-    for (let tweet of tweetsArray) {
-      tweet = tweet.replace(/[#, ＃].*/g, '')
-      tweet = tweet.replace(/https?:\/\/[\w/:%#\$&\?\(\)~\.=\+\-]+/g, '')
-
-      randomTime(tweet, 'twitter')
-    }
+  } else {
+    console.log('クライアントIDが違います')
   }
 })
 
-socket.on('Chats', (chats) => {
-  if (chats) {
-    try {
-      const items = chats.items
-      const length = items.length
+socket.on('Chats', (chats, clientId) => {
+  try {
+    if (compareId(clientId)) {
+      if (chats) {
+        const items = chats.items
+        const length = items.length
 
-      let chatsArray = Array(length)
-      if (length) {
-        for (let i = 0; i < length; i++) {
-          chatsArray[i] = items[i].snippet.textMessageDetails.messageText
+        let chatsArray = Array(length)
+        if (length) {
+          for (let i = 0; i < length; i++) {
+            chatsArray[i] = items[i].snippet.textMessageDetails.messageText
+          }
+        }
+
+        for (const chat of chatsArray) {
+          randomTime(chat, 'youtube')
         }
       }
-
-      for (const chat of chatsArray) {
-        randomTime(chat, 'youtube')
-      }
-
-      console.log(chatsArray)
-    } catch (e) {
-      console.log(e)
     }
+  } catch (e) {
+    console.log(e)
   }
 })
 
@@ -103,7 +107,6 @@ const randomHeight = () => `${Math.round(Math.random() * 500)}px`
 
 // コメント作成関数
 const createComment = (text, media) => {
-  // ブラウザサイズ
   const width = document.documentElement.clientWidth
   const height = document.documentElement.clientHeight
 
@@ -148,6 +151,10 @@ const createComment = (text, media) => {
 
     container.scrollTop = container.scrollHeight
   }
+}
+
+const compareId = (clientId) => {
+  return id == clientId ? true : false
 }
 
 const mediaIcon = (comment, media) => {

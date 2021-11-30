@@ -45,21 +45,14 @@ io.on('connection', (socket) => {
     io.emit('Layout', layout)
   })
 
-  socket.on('Twitter', async (json) => {
-    const hashTag = JSON.parse(json).hashTag
+  socket.on('Twitter', async (hashTag, clientId) => {
     const tweets = await twitter.getTweets(hashTag)
-    io.emit('Tweets', tweets)
+    io.emit('Tweets', tweets, clientId)
   })
 
-  socket.on('Youtube', async (json) => {
-    const id = JSON.parse(json).youtubeId
-
-    const pattern = '^(https?://)?(www.)?(youtube.com|youtu.?be)/.+$'
-    const result = id.match(pattern)[0]
-    const youtubeId = result.slice(-11)
-
+  socket.on('Youtube', async (youtubeId, clientId) => {
     const chats = await youtube.getChatId(youtubeId)
-    io.emit('Chats', chats)
+    io.emit('Chats', chats, clientId)
   })
 
   socket.on('disconnect', () => {
