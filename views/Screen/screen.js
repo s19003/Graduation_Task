@@ -94,6 +94,9 @@ const changeFormat = (getFormat) => {
 
   // youtube切り替わった時のコンテナ作成
   if (format == 'niconico' && getFormat == 'youtube') {
+    const fix_position = document.createElement('div')
+    fix_position.classList.add('fix_position')
+    screen.appendChild(fix_position)
     const container = document.createElement('div')
     container.classList.add('container')
     screen.appendChild(container)

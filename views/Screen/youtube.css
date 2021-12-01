@@ -1,7 +1,21 @@
 .container {
-  width: 500px;
-  height: 100%;
+  width: 20%;
+  height: 50%;
   overflow: scroll;
+  /* border: 3px solid #000000; */
+  /* background-color: rgba(15, 0, 0, 0.1); */
+  /* margin: 3px; */
+}
+
+/* 新しく追加 */
+.container {
+  position: absolute;
+  top: 45%;
+  left: 20px;
+}
+
+.fix_position {
+  height: 480px;
 }
 
 .container::-webkit-scrollbar {
